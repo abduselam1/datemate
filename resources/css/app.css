@@ -1,0 +1,55 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+::-webkit-scrollbar {
+    width: 1vh;
+    display: none;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #97aac4;
+    /* border: 3px solid #edf2f7; */
+    border-radius: 50vh;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 50;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+}
+
+.text-light{
+    @apply text-gray-800;
+}
+
+.text-dark{
+    @apply text-gray-200;
+}
+
+.label{
+    @apply text-light font-bold
+}
+
+.input{
+    @apply text-gray-600 outline-none border-2 focus:outline-brand rounded-lg px-2 py-2 w-full;
+}
+
+/* .router-link-exact-active{
+    @apply  bg-brand2;
+} */
+
+.home-page-link{
+    @apply text-gray-500 font-bold mt-3 px-2 py-2 hover:bg-gray-200 rounded-lg flex items-center focus:outline-brand;
+}
