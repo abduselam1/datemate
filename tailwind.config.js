@@ -11,10 +11,14 @@ module.exports = {
 
     theme: {
         extend: {
+            borderWidth:{
+                '3': '3px',
+                '12': '12px',
+            },
             fontFamily: {
                 sans: ['Nunito', ...defaultTheme.fontFamily.sans],
-                brand: ['Tilt Neon',...defaultTheme.fontFamily.mono],
-                ubuntu: ['Ubuntu',...defaultTheme.fontFamily.sans]
+                brand: ['Tilt Neon','sans-serif'],
+                ubuntu: ['Ubuntu','sans-serif']
             },
             colors:{
                 // brand:'#FF4066',
@@ -26,9 +30,12 @@ module.exports = {
             },
             screens: {
                 'xs': '450px',
-              },
+            },
+            borderWidth :{
+                '3': '3px'
+            }
         },
-        
+
     },
 
     plugins: [],

@@ -7,6 +7,9 @@ import change from './pages/auth/components/NewPassword.vue'
 import onboard from './pages/onboard/Onboard.vue'
 import wizard from './pages/onboard/components/wizard.vue'
 import wizard2 from './pages/onboard/components/wizard2.vue'
+import setting from './pages/setting/Setting.vue'
+import profile from './pages/Profile/Profile.vue'
+import message from './pages/message/Message.vue'
 
 const routes = [
     {
@@ -47,6 +50,22 @@ const routes = [
         name:"onboard",
         component: wizard
       },
+      {
+        path: '/setting',
+        name:"setting",
+        component: setting
+      },
+      {
+        path: '/message',
+        name:"message",
+        component: message
+      },
+      {
+        path: '/profile',
+        name:"profile",
+        component: profile
+      },
+      
       
     //   {
     //     path: '/profile',

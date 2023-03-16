@@ -1,8 +1,8 @@
 <template>
-    <div class="sm:hidden bg-gray-50  col-span-5 mx-auto w-full  h-screen flex">
+    <div class="sm:hidden bg-gray-50 dark:bg-black/90 col-span-5 mx-auto w-full  h-screen flex">
         <mobile-home />
     </div>
-    <div class="sm:flex hidden bg-gray-50  col-span-4 mx-auto w-full py-5 h-screen">
+    <div class="sm:flex hidden bg-gray-50 dark:bg-black/90 col-span-4 mx-auto w-full py-5 h-screen">
             <div class="relative flex  max-w-3xl mx-auto shadow-2xl  w-full over h-full rounded-xl">
                 <div class="relative h-full w-3/5">
                     <img src="/media/profile-sample.jpg" class='absolute h-full w-full object-cover' alt="">
@@ -37,18 +37,18 @@
                     </div>
                 </div>
                 
-                <div class="w-2/5 bg-white  pt-5 px-1 rounded-xl overflow-scroll">
+                <div class="w-2/5 bg-white dark:bg-black/20 pt-5 px-1 rounded-xl overflow-scroll">
                     <div class="flex justify-between items-center w-full">
                         <div class="flex items-baseline  justify-between px-2 ">
                             
-                                <h3 class="text-3xl xs:text-4xl text-gray-600  font-bold font-brand">Jane Doe</h3>
+                                <h3 class="text-3xl xs:text-4xl text-gray-600 dark:text-gray-200 font-bold font-brand">Jane Doe</h3>
                                 
                             
-                                <span class="font-light text-xl xs:text-2xl font-brand text-gray-600 ">, 22</span>
+                                <span class="font-light text-xl xs:text-2xl font-brand text-gray-600 dark:text-gray-200">, 22</span>
                             
                         </div>
-                        <div class="px-2 rounded-lg cursor-pointer border border-gray-400 ">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7  h-7 ">
+                        <div class="px-2 rounded-lg cursor-pointer border border-gray-400 dark:border-gray-500">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 dark:text-gray-500 h-7 ">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM12.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM18.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
                             </svg>
 
@@ -56,20 +56,20 @@
                     </div>
                     <div class="flex justify-between items-center xs:px-2 px-1 my-5">
                         <div class="flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 fill-current text-gray-600 " viewBox="0 0 20 20" fill="currentColor">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 fill-current text-gray-600 dark:text-gray-300" viewBox="0 0 20 20" fill="currentColor">
                                 <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
                             </svg>
-                            <span class="text-gray-600 text-sm  font-brand font-semibold ml-0.5"> Addis Ababa, Ethiopia</span>
+                            <span class="text-gray-600 text-sm dark:text-gray-500 font-brand font-semibold ml-0.5"> Addis Ababa, Ethiopia</span>
                         </div>
-                        <span class=" font-semibold text-sm text-gray-600 ">1KM near you</span>
+                        <span class=" font-semibold text-sm text-gray-600 dark:text-gray-500">1KM near you</span>
 
                     </div>
-                    <div class="px-2  text-gray-600  pb-5 bg-opacity-40">
-                        <h3 class="text-gray-700   text-xl font-bold">Bio</h3>
+                    <div class="px-2 dark:text-gray-400 text-gray-600  pb-5 bg-opacity-40">
+                        <h3 class="text-gray-700 dark:text-gray-300  text-xl font-bold">Bio</h3>
                         <p class="">Love to sing <br> Dont bother if you need a short term relationship I'm completly not into short term relationship </p>
                     </div>
-                    <div class="px-2   pb-5 bg-opacity-40">
-                        <h3 class="text-gray-700  text-xl font-bold">Interest</h3>
+                    <div class="px-2 dark:text-gray-400  pb-5 bg-opacity-40">
+                        <h3 class="text-gray-700 dark:text-gray-300 text-xl font-bold">Interest</h3>
                         <div class="flex flex-wrap ">
                             <badge :text="'Laughing'" />
                             <badge :text="'Pizza'" />
@@ -78,8 +78,8 @@
                             <badge :text="'Laughing'" />
                         </div>
                     </div>
-                    <div class="px-2  text-gray-600  pb-5 bg-opacity-40">
-                        <h3 class="text-gray-700  text-xl font-bold">Other info</h3>
+                    <div class="px-2 dark:text-gray-400 text-gray-600  pb-5 bg-opacity-40">
+                        <h3 class="text-gray-700 dark:text-gray-300 text-xl font-bold">Other info</h3>
                         <div class="flex flex-col ">
                             <div class="flex items-center">
                                 <h4 class="mr-2">Religion:</h4>

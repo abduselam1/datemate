@@ -17,15 +17,21 @@ use Inertia\Inertia;
 */
 
 
-Route::view('/login','app')->name('login');
+// Route::view('/login','app')->name('login');
 
-Route::view('/register','app')->name('register');
+// Route::view('/register','app')->name('register');
 
-Route::view('/forgot-password','app')->name('forgot');
+// Route::view('/forgot-password','app')->name('forgot');
 
-Route::view('/onboard','app');
+// Route::view('/onboard','app');
 
-Route::view('/','app');
+// Route::view('/', 'app');
+
+// Route::view('/setting', 'app');
+
+Route::get('/{any}', function () {
+    return view('app');
+})->where('any', '.*');
 
 Route::group(['middleware'=>'auth'],function(){
     Route::view('/test','app');

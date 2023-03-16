@@ -43,7 +43,11 @@
 }
 
 .input{
-    @apply text-gray-600 outline-none border-2 focus:outline-brand rounded-lg px-2 py-2 w-full;
+    @apply text-gray-600 outline-none border focus:border-0 focus:outline-brand rounded-lg px-2 py-2 w-full;
+}
+
+.setting-input{
+    @apply text-gray-600 outline-none border-2 focus:border-0 focus:outline-brand rounded-lg px-2 py-1 w-full;
 }
 
 /* .router-link-exact-active{
@@ -51,5 +55,9 @@
 } */
 
 .home-page-link{
-    @apply text-gray-500 font-bold mt-3 px-2 py-2 hover:bg-gray-200 rounded-lg flex items-center focus:outline-brand;
+    @apply text-gray-600 font-semibold mt-3 px-2 py-2 mb-1 rounded-lg flex items-center outline-none focus:outline-brand;
+}
+
+.btn{
+    @apply rounded-xl w-full 
 }
