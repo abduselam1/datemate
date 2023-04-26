@@ -1,6 +1,6 @@
 <template>
     <div class="relative mr-3  " :class="{'-mt-5':to}">
-        <router-link v-if="to " :to="to" class=" p-1">
+        <router-link v-if="to" :to="to" class=" p-1">
             <slot></slot>
         </router-link>
         <div v-else class="">

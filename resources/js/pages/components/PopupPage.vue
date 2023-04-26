@@ -1,6 +1,7 @@
 <template>
-    <div  class=" z-40 w-screen h-screen fixed left-0 top-0 flex flex-col justify-start items-center" style="background:rgba(0,0,0,.6);">
+    <div  class=" z-40 w-screen h-screen fixed left-0 top-0 flex flex-col justify-start items-center" style="background:rgba(0,0,0,.6);" @click.exact.self="close">
             <slot></slot>
+
     
     </div>
 
@@ -21,15 +22,26 @@ export default {
     //         // exampleComposableText.value = 'edit hello'
     //     });
     // },
+    created(){
+        const handleEscape = (e) =>{
+            if(e.key == "Esc" || e.key === "Escape"){
+                this.$emit('close')
+            }
+        }
+
+        document.addEventListener('keydown',handleEscape)
+
+        
+    },
     data(){
         return {
             searchOpen:true
         }
     },
     methods:{
-        // closePopup(){
-        //     this.$emit('close')
-        // }
+        close(){
+            this.$emit('close')
+        }
     }
 
 }

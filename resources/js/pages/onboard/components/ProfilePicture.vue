@@ -33,7 +33,7 @@
             </div>
             <div class="mt-5">
                 <label for="bio" class="label">Bio</label>
-                <textarea class="block input" v-model="bio" id="bio" name="bio" placeholder="Enter your message" rows="3" required ></textarea>
+                <textarea class="block input" v-model="bio" id="bio" name="bio" placeholder="Enter your Bio" rows="3" required ></textarea>
             </div>
         </div>
         

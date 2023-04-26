@@ -39,11 +39,11 @@
 }
 
 .label{
-    @apply text-light font-bold
+    @apply text-light font-semibold
 }
 
 .input{
-    @apply text-gray-600 outline-none border focus:border-0 focus:outline-brand rounded-lg px-2 py-2 w-full;
+    @apply text-gray-600 outline-none outline-gray-200 focus:outline-brand rounded-lg px-2 py-2 w-full;
 }
 
 .setting-input{
@@ -55,7 +55,7 @@
 } */
 
 .home-page-link{
-    @apply text-gray-600 font-semibold mt-3 px-2 py-2 mb-1 rounded-lg flex items-center outline-none focus:outline-brand;
+    @apply text-gray-600 font-semibold mt-3 px-2 py-2 mb-1 rounded-full flex items-center outline-none;
 }
 
 .btn{

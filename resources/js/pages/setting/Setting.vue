@@ -1,19 +1,28 @@
 <template>
-    <div class=" bg-gray-50 col-span-4 sm:col-span-3 w-full sm:py-5 h-screen overflow-hidden">
-        <div class="relative sm:mt-20 mt-3  sm:max-w-xl md:max-w-2xl mx-auto h-full overflow-y-scroll overflow-x-clip ">
-            <div class=" absolutes z-10 sticky top-0 bg-gray-50 left-0 w-full  border-b truncate border-gray-300 ">
-                <ul class=" flex -mb-px z-20 text-gray-500 overflow-scroll font-semibold">
-                    <li @click="changeTab(1)" :class="{'border-b-3 border-brand':active == 1}" class="transform ease-out mx-3 text-sm cursor-pointer fonts-semibold pb-3">Edit profile</li>
-                    <li @click="changeTab(2)" :class="{'border-b-3 border-brand':active == 2}" class="transform ease-out mx-3 text-sm cursor-pointer fonts-semibold pb-3">Change password</li>
-                    <li @click="changeTab(3)" :class="{'border-b-3 border-brand':active == 3}" class="transform ease-out mx-3 text-sm cursor-pointer fonts-semibold pb-3 ">Subscription</li>
-                    <li @click="changeTab(4)" :class="{'border-b-3 border-brand':active == 4}" class="transform ease-out mx-3 text-sm cursor-pointer fonts-semibold pb-3">Security</li>
-                    <li @click="changeTab(5)" :class="{'border-b-3 border-brand':active == 5}" class="transform ease-out mx-3 text-sm cursor-pointer fonts-semibold pb-3">Privacy and Security</li>
-                    <li @click="changeTab(6)" :class="{'border-b-3 border-brand':active == 6}" class="transform ease-out mx-3 text-sm cursor-pointer fonts-semibold pb-3">Security</li>
-                    <li @click="changeTab(7)" :class="{'border-b-3 border-brand':active == 7}" class="transform ease-out mx-3 text-sm cursor-pointer fonts-semibold pb-3">Privacy and Security</li>
-                    <li @click="changeTab(8)" :class="{'border-b-3 border-brand':active == 8}" class="transform ease-out mx-3 text-sm cursor-pointer fonts-semibold pb-3">Security</li>
+    <app-bar title="Setting" />
+    <div class=" bg-gray-50 col-span-5 sm:col-span-4 w-full mt-10 sm:mt-0 sm:py-5 h-screen overflow-hidden">
+        <!-- <div class="sm:hidden z-20 px-3 py-2 bg-gray-50 items-center flex">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+            </svg>
+            <span class="ml-3 text-lg text-slate-700">Setting</span>
+        </div> -->
+        <div class="  rounded-xl pb-5 relative sm:mt-16  h-full  sm:max-w-xl  md:max-w-2xl xl:max-w-3xl mx-auto ">
+            <div class=" absolutes sticky top-0 pt-5 bg-gray-100 left-0 w-full rounded-t-xl  border-y truncate border-gray-300 ">
+                <ul class=" flex -mb-px text-gray-400 overflow-scroll font-semibold">
+                    <li @click="changeTab(1)" :class="{'border-b-3 text-gray-600 border-brand':active == 1}" class="transform ease-out mx-3 text-sm cursor-pointer fonts-semibold pb-3">Edit profile</li>
+                    <li @click="changeTab(2)" :class="{'border-b-3 text-gray-600 border-brand':active == 2}" class="transform ease-out mx-3 text-sm cursor-pointer fonts-semibold pb-3">Change password</li>
+                    <li @click="changeTab(3)" :class="{'border-b-3 text-gray-600 border-brand':active == 3}" class="transform ease-out mx-3 text-sm cursor-pointer fonts-semibold pb-3 ">Subscription</li>
+                    <li @click="changeTab(4)" :class="{'border-b-3 text-gray-600 border-brand':active == 4}" class="transform ease-out mx-3 text-sm cursor-pointer fonts-semibold pb-3">Notifications</li>
+                    <li @click="changeTab(5)" :class="{'border-b-3 text-gray-600 border-brand':active == 5}" class="transform ease-out mx-3 text-sm cursor-pointer fonts-semibold pb-3">Privacy and Security</li>
+                    <li @click="changeTab(6)" :class="{ 'border-b-3 text-gray-600 border-brand': active == 6 }" class="transform ease-out mx-3 text-sm cursor-pointer fonts-semibold pb-3">Login activity</li>
+                    <!-- <li @click="changeTab(7)" :class="{ 'border-b-3 text-gray-600 border-brand': active == 7 }" class="transform ease-out mx-3 text-sm cursor-pointer fonts-semibold pb-3">Others</li> -->
+                    
+                    <!-- <li @click="changeTab(7)" :class="{'border-b-3 border-brand':active == 7}" class="transform ease-out mx-3 text-sm cursor-pointer fonts-semibold pb-3">Privacy and Security</li>
+                    <li @click="changeTab(8)" :class="{'border-b-3 border-brand':active == 8}" class="transform ease-out mx-3 text-sm cursor-pointer fonts-semibold pb-3">Security</li> -->
                 </ul>
             </div>
-            <div class=" pb-16 px-3 sm:px-0 pt-3">
+            <div class=" pb-24   sm:px-0 overflow-scroll h-full ">
                 <div v-show="active == 1">
                     <profile />
                 </div>
@@ -21,11 +30,20 @@
                     <change-password />
                 </div>
                 <div v-show="active == 3">
-                    <profile />
+                    <subscription />
                 </div>
                 <div v-show="active == 4">
-                    <profile />
+                    <notification-setting />
                 </div>
+
+                <div v-show="active ==5">
+                    <privacy-and-security />
+                </div>
+
+                <div v-show="active == 6">
+                    <login-activity />
+                </div>
+                
                 
             </div>
             
@@ -44,9 +62,13 @@
 import iconLink from './../components/IconLink.vue'
 import ChangePassword from './components/ChangePassword.vue'
 import profile from './components/EditProfile.vue'
+import LoginActivity from './components/LoginActivity.vue'
+import NotificationSetting from './components/NotificationSetting.vue'
+import Subscription from './components/Subscription.vue'
+import PrivacyAndSecurity from './components/PrivacyAndSecurity.vue'
 
 export default {
-    components:{iconLink,ChangePassword,profile},
+    components:{iconLink,ChangePassword,profile,LoginActivity,NotificationSetting,Subscription, PrivacyAndSecurity },
     data(){
         return {
             active:1

@@ -10,6 +10,8 @@ import wizard2 from './pages/onboard/components/wizard2.vue'
 import setting from './pages/setting/Setting.vue'
 import profile from './pages/Profile/Profile.vue'
 import message from './pages/message/Message.vue'
+import notification from './pages/notification/Notification.vue'
+import swipe from './pages/dashboard/swipe.vue'
 
 const routes = [
     {
@@ -65,6 +67,12 @@ const routes = [
         name:"profile",
         component: profile
       },
+      {
+        path:'/notifications',
+        name:'notification',
+        component:notification
+      },
+      
       
       
     //   {

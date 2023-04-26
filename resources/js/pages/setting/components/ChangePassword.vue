@@ -1,16 +1,16 @@
 <template>
-    <form @submit.prevent="updatePassword">
-        <h4 class=" sm:text-xl md:text-2xl text-xg font-semibold text-light">Update your password</h4>
+    <form class="px-10 bg-white border-x border-b rounded-b-xl pt-5" @submit.prevent="updatePassword">
+        <h4 class=" sm:text-xl text-md text-light">Update your password</h4>
 
-        <div class="mt-7 w-full mx-2">
+        <div class="mt-7 w-full ">
             <label for="current-password" class="label">Current Password</label>
             <input type="password" name="current-password" id="current-password" placeholder="********" v-model='currentPassword' class="py-1 input text-sm mt-2 font-semibold">
         </div>
-        <div class="mt-3 w-full mx-2">
+        <div class="mt-3 w-full ">
             <label for="new-password" class="label">New Password</label>
             <input type="password" name="newPassword" placeholder="********"  id="new-password" v-model='newPassword' class="py-1 input text-sm mt-2 font-semibold">
         </div>
-        <div class="mt-3 w-full mx-2">
+        <div class="mt-3 w-full ">
             <label for="confirm-password" class="label">Confirm Password</label>
             <input type="password" name="confirmPassword" id="confirm-password" placeholder="********" v-model='confirmPassword' class="py-1 input text-sm mt-2 font-semibold">
         </div>
