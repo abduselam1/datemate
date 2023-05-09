@@ -1,9 +1,18 @@
 <?php
 
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Livewire\Auth\ForgotPassword;
+use App\Http\Livewire\Auth\Login;
+use App\Http\Livewire\Auth\Onboard;
+use App\Http\Livewire\Auth\Register;
+use App\Http\Livewire\Auth\ResetPassword;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use Igaster\LaravelCities\Geo;
+use PragmaRX\Countries\Package\Countries;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +37,29 @@ use Inertia\Inertia;
 // Route::view('/', 'app');
 
 // Route::view('/setting', 'app');
+
+Route::get('login', Login::class)->name('login')->middleware('guest');
+
+Route::get('register', Register::class)->name('register')->middleware('guest');
+
+Route::get('onboard',Onboard::class)->name('onboard')->middleware('guest');
+
+Route::get('reset-password', ResetPassword::class)->name('reset-password')->middleware('guest');
+
+Route::get('forgot-password', ForgotPassword::class)->name('forgot-password')->middleware('guest');
+
+
+Route::get('geo',function(){
+    // return Geo::getCountries();               // Get a Collection of all countries
+    // Geo::getCountry('US');             // Get item by Country code
+    // return Geo::findName('Eth');   // Find item by (ascii) name
+    // return Geo::searchNames('Eth');          // Search item by all alternative names. Case insensitive 
+    // Geo::searchNames('vegas', Geo::getCountry('US'));  // ... and belongs to an item
+    // Geo::getByIds([390903, 3175395]);   // Get a Collection of items by Ids
+
+    $c = Countries::where('name','Ethiopia')->count();
+    return $c;
+});
 
 Route::get('/{any}', function () {
     return view('app');

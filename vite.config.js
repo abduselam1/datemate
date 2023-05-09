@@ -8,6 +8,11 @@ export default defineConfig({
             input: 'resources/js/app.js',
             refresh: true,
         }),
+        laravel({
+            input: 'resources/auth_js/app.js',
+            refresh: true,
+        }),
+        
         vue({
             template: {
                 transformAssetUrls: {

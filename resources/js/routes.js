@@ -32,26 +32,26 @@ const routes = [
           ]
         }
       },
-      {
-        path: '/login',
-        name:"login",
-        component: login,
-      },
-      {
-        path: '/register',
-        name:"register",
-        component: register
-      },
+      // {
+      //   path: '/login',
+      //   name:"login",
+      //   component: login,
+      // },
+      // {
+      //   path: '/register',
+      //   name:"register",
+      //   component: register
+      // },
       {
         path: '/forgot-password',
         name:"forgot-password",
         component: change
       },
-      {
-        path: '/onboard',
-        name:"onboard",
-        component: wizard
-      },
+      // {
+      //   path: '/onboard',
+      //   name:"onboard",
+      //   component: wizard
+      // },
       {
         path: '/setting',
         name:"setting",
