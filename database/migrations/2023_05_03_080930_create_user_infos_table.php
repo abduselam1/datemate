@@ -25,10 +25,12 @@ return new class extends Migration
             $table->string('job_title')->nullable();
             $table->string('company_name')->nullable();
             $table->string('school')->nullable();
+            $table->string('education_level')->nullable();
+            $table->string('phone_number')->nullable();
             $table->string('bio');
-            $table->json('other');
+            $table->json('other')->default("{}");
             $table->double('height')->nullable();
-            $table->string('relationship')->null;
+            $table->string('relationship')->nullable(12);
             $table->softDeletes();
             $table->timestamps();
         });

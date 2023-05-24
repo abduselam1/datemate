@@ -1,4 +1,4 @@
-<div x-data="{imagePreview:null}" class="w-full">
+<div x-data="{imagePreview:null,finished:@entangle('finished')}" class="w-full">
     <div class="flex justify-center mb-5 text-light">
         <div class="flex items-center">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 h-10   ">
@@ -12,7 +12,7 @@
     <div class="mt-6">
         <div class="block md:mt-0 mt-3 w-full">
             
-            <input class="hidden" accept="image/*" id="profile" type="file" x-ref='photo' x-on:change="
+            <input class="hidden" accept="image/*" wire:model="image" id="profile" type="file" x-ref='photo' x-on:change="
                 file = $refs.photo.files[0]
                 reader = new FileReader()
 
@@ -39,9 +39,13 @@
             
             
         </div>
+        @error('image') <span class="error">{{$message}}</span> @enderror
+
         <div class="mt-5">
             <label for="bio" class="label">Bio</label>
-            <textarea class="block input" v-model="bio" id="bio" name="bio" placeholder="Enter your Bio" rows="3" required ></textarea>
+            <textarea class="block input" wire:model="bio" id="bio" name="bio" placeholder="Enter your Bio" rows="3" ></textarea>
+            @error('bio') <span class="error">{{$message}}</span> @enderror
+
         </div>
     </div>
     
@@ -50,8 +54,12 @@
         <button class="px-4 py-1 bg-brand2 rounded-lg text-dark font-semibold" @click="$emit('changePage','-')">Previous</button>
         <button class="px-4 py-1 bg-brand2 rounded-lg text-dark font-semibold" @click="$emit('changePage','+')" >Next</button>            
     </div> -->
-    <div class="mb-4 flex justify-between mt-5">
-        <button class="bg-gradient-to-r from-brand to-brand2 hover:outline-brand2 text-white font-bold py-2 px-4 rounded-full" @click.prevent="page = --page">Previous</button>
-        <button class="bg-gradient-to-r from-brand to-brand2 hover:outline-brand2 text-white font-bold py-2 px-4 rounded-full " @click.prevent="">Finish</button>
+    <div x-show="! finished" class="mb-4 flex justify-between mt-5">
+        <a wire:click="prev" class=" cursor-pointer bg-gradient-to-r from-brand to-brand2 hover:outline-brand2 text-white font-bold py-2 px-4 rounded-full" >Previous</a>
+        <a wire:click="submit" class=" cursor-pointer bg-gradient-to-r from-brand to-brand2 hover:outline-brand2 text-white font-bold py-2 px-4 rounded-full " >Finish</a>
+    </div>
+    <div x-show="finished" class="mb-4 mt-5 flex justify-end">
+        <a wire:click="finish" class=" cursor-pointer bg-gradient-to-r from-brand to-brand2 hover:outline-brand2 text-white font-bold py-2 px-4 rounded-full">submit</a>
+
     </div>
 </div>

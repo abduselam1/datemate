@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\User;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -18,6 +19,6 @@ class Language extends Model
 
     public function users(): BelongsToMany
     {
-        return $this->belongsToMany(UserInfo::class);
+        return $this->belongsToMany(User::class);
     }
 }

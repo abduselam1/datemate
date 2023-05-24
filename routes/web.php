@@ -42,9 +42,13 @@ Route::get('login', Login::class)->name('login')->middleware('guest');
 
 Route::get('register', Register::class)->name('register')->middleware('guest');
 
-Route::get('onboard',Onboard::class)->name('onboard')->middleware('guest');
+Route::get('onboard',Onboard::class)->name('onboard')->middleware('auth');
 
-Route::get('reset-password', ResetPassword::class)->name('reset-password')->middleware('guest');
+Route::get('reset-password/{token}', ResetPassword::class)->name('password.reset')->middleware('guest');
+
+Route::get('asd',function(){
+    dd(session()->getId());
+})->name('success');
 
 Route::get('forgot-password', ForgotPassword::class)->name('forgot-password')->middleware('guest');
 
@@ -61,11 +65,11 @@ Route::get('geo',function(){
     return $c;
 });
 
-Route::get('/{any}', function () {
-    return view('app');
-})->where('any', '.*');
 
-Route::group(['middleware'=>'auth'],function(){
+Route::group(['middleware'=>['auth', 'check.account']],function(){
+    Route::get('/{any}', function () {
+        return view('app');
+    })->where('any', '.*');
     Route::view('/test','app');
     
 

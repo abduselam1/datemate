@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\User;
 
 use App\Models\User;
 use App\Models\User\Mood;
@@ -27,6 +27,8 @@ class UserInfo extends Model
         'job_title',
         'company_name',
         'school',
+        'education_level',
+        'phone_number',
         'bio',
         'other',
         'height',

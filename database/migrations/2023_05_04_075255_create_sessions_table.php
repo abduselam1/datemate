@@ -14,14 +14,15 @@ return new class extends Migration
     public function up()
     {
         Schema::create('sessions', function (Blueprint $table) {
-            $table->string('id')->primary();
+            $table->id();
             $table->foreignId('user_id')->nullable()->index();
             $table->string('ip_address', 45)->nullable();
-            $table->text('user_agent')->nullable();
+            $table->string('country')->nullable();
+            $table->string('city')->nullable();
+            $table->string('browser')->nullable();
             $table->longText('payload')->nullable();
+            $table->dateTime('last_activity');
 
-            $table->softDeletes();
-            $table->timestamps();
 
         });
     }

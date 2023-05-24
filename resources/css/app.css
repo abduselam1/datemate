@@ -61,3 +61,7 @@
 .btn{
     @apply rounded-xl w-full 
 }
+
+.error{
+    @apply text-sm font-semibold text-red-400;
+}

@@ -231,6 +231,9 @@ export default {
             reportOPen:false
         }
     },
+    mounted(){
+        
+    },
     methods:{
         closePopup(){
             this.reportOPen = false
