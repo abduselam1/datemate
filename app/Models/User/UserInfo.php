@@ -24,7 +24,7 @@ class UserInfo extends Model
         'interested_sex',
         'dob',
         'purpose',
-        'job_title',
+        'job_title_id',
         'company_name',
         'school',
         'education_level',
@@ -33,6 +33,10 @@ class UserInfo extends Model
         'other',
         'height',
         'relationship',
+        'star',
+        'smoking',
+        'drinking',
+        'personality'
     ];
 
     protected $casts = [
@@ -60,14 +64,14 @@ class UserInfo extends Model
         return $this->belongsTo(Mood::class);
     }
 
-
-    public function interests(): BelongsToMany
-    {
-        return $this->belongsToMany(Interest::class);
-    }
-
     public function languages(): BelongsToMany
     {
         return $this->belongsToMany(Language::class);
     }
+
+    public function jobTitle(): BelongsTo
+    {
+        return $this->belongsTo(JobTitle::class);
+    }
+
 }

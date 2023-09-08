@@ -47,7 +47,7 @@
 }
 
 .setting-input{
-    @apply text-gray-600 outline-none border-2 focus:border-0 focus:outline-brand rounded-lg px-2 py-1 w-full;
+    @apply text-gray-600 outline-none border border-gray-200 focus:border-brand rounded-lg px-2 py-2 w-full;
 }
 
 /* .router-link-exact-active{
@@ -59,7 +59,7 @@
 }
 
 .btn{
-    @apply rounded-xl w-full 
+    @apply rounded-xl w-full
 }
 
 .error{

@@ -53,7 +53,7 @@ class Profile extends Component
 
     public function finish()
     {
-        // dd($this->data);
+//         dd($this->data);
         $user = auth()->user();
         $userInfo = $user->info()->create([
             'sex' => $this->data['sex'],
@@ -61,7 +61,7 @@ class Profile extends Component
             'bio' => $this->bio,
             'dob' => Carbon::parse($this->data['dob']),
             'religion_id' => $this->data['religion'],
-            'job_title' => $this->data['employment'],
+            'job_title_id' => $this->data['jobTitle'],
             'phone_number' => $this->data['phone_number'],
             'education_level' => $this->data['education'],
             'purpose' => $this->data['purpose'],
@@ -75,19 +75,25 @@ class Profile extends Component
     }
 
     public function storeUserImage($user){
-        $image = Image::make($this->image)->encode('jpg');
-        $img_name = Storage::disk('public')->put(Str::random() . '.jpg', $image);
+        // $image = Image::make($this->image)->encode('jpg');
+        $img_name = $this->image->store('','public');
+        // Storage::disk('public')->put(Str::random() . '.jpg', $image);
+        $image = Image::make(public_path('storage/'.$img_name));
         $width = $image->width() > 1000 ? $image->width() * 0.3 : $image->width() * 0.1;
         $height = $image->width() > 1000 ? $image->height() * 0.3 : $image->height() * 0.1;
 
-        $image_thumbnail = $image->resize($width, $height, function ($constraint) {
-            $constraint->aspectRatio();
-        });
-        $img_thumb = Storage::disk('public')->put(Str::random() . '_thumbnail.jpg', $image_thumbnail);
+        // $img_thumb = Storage::disk('public')->put(Str::random() . '_thumbnail.jpg', $image_thumbnail);
 
+        $thumbnailPath = 'storage/thumbnail/';
+        // $image->resize($width, $height, function ($constraint) {
+        //     $constraint->aspectRatio();
+        // });
+        // $image->resize(250, 125);
+        $thumbnailName = $thumbnailPath . Str::random().'.'.$image->extension;
+        $thumbImageUpload = $image->save($thumbnailName,50);
         $user->pictures()->create([
             'url' => $img_name,
-            'thumbnail_url' => $img_thumb,
+            'thumbnail_url' => $thumbnailName,
             'ext' => $image->extension,
             'size' => $image->filesize(),
             'is_primary' => true,

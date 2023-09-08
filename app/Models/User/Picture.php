@@ -3,6 +3,7 @@
 namespace App\Models\User;
 
 use App\Models\User;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -26,19 +27,24 @@ class Picture extends Model
         'is_primary' => 'boolean',
     ];
 
-    public function picture()
+    public function picture(): Attribute
     {
-        return asset('storage/' . $this->url);
+        return Attribute::make(
+            fn(string $value) => asset('storage/' . $this->url),
+        );
+//        return asset('storage/' . $this->url);
     }
 
-    public function thumbnail()
+    public function thumbnail(): Attribute
     {
-        return asset('storage/' . $this->thumbnail_url);
+        return Attribute::make(
+            fn(string $value) => asset(  $this->thumbnail_url),
+        );
     }
 
-    
 
-    
+
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);

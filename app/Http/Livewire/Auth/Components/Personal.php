@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Auth\Components;
 
+use App\Models\User\JobTitle;
 use App\Models\User\Language;
 use App\Models\User\Religion;
 use Livewire\Component;
@@ -18,6 +19,11 @@ class Personal extends Component
     public $allLanguages;
     public $searchLanguage;
 
+    public $jobTitles;
+    public $purposes = ['Here to Date', 'Open to chat', 'Ready for a relationship'];
+
+    public $educationLevels = ['Less than 8th grade', 'High school', 'College diploma', 'Bachelor degree', 'Masters degree', 'PHD degree',];
+
     protected $listeners = ['remove'=>'removeLanguage','submit'=>'submitForm'];
 
     protected $rules = [
@@ -26,7 +32,7 @@ class Personal extends Component
         'employment' => 'required'
     ];
 
-    
+
 
     public function removeLanguage($key){
         $new_array = [];
@@ -50,7 +56,7 @@ class Personal extends Component
             if($language['id'] == $id)
                 return;
         }
-        
+
         foreach($this->allLanguages as $language){
             if($language->id == $id){
                 $this->languages[] = $language->toArray();
@@ -96,7 +102,7 @@ class Personal extends Component
         $this->emit('submitForm',[
             'religion' => $this->religion,
             'education' => $this->education,
-            'employment' => $this->employment,
+            'jobTitle' => $this->employment,
             'languages' => $this->languagesId,
             'purpose' => $this->purpose,
         ]);
@@ -106,6 +112,8 @@ class Personal extends Component
         $this->allLanguages = Language::select('id','name')->get();
 
         $this->religions = Religion::all();
+
+        $this->jobTitles = JobTitle::orderBy('name')->get();
         // dd($this->allLanguages);
     }
 

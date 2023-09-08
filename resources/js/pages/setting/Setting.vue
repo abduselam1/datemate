@@ -76,7 +76,8 @@ export default {
     },
     methods:{
         changeTab(tab){
-            console.log(tab);
+            console.log(this.$parent);
+            // console.log(tab);
             this.active = tab
         }
     }

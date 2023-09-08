@@ -9,9 +9,11 @@ import wizard from './pages/onboard/components/wizard.vue'
 import wizard2 from './pages/onboard/components/wizard2.vue'
 import setting from './pages/setting/Setting.vue'
 import profile from './pages/Profile/Profile.vue'
-import message from './pages/message/Message.vue'
+// import message from './pages/message/Message.vue'
+import message from './pages/message/Message-dark.vue'
 import notification from './pages/notification/Notification.vue'
 import swipe from './pages/dashboard/swipe.vue'
+import Matchs from "@/pages/matchs/Matchs.vue";
 
 const routes = [
     {
@@ -72,9 +74,14 @@ const routes = [
         name:'notification',
         component:notification
       },
-      
-      
-      
+    {
+        path:'/matchs',
+        name: 'matchs',
+        component: Matchs
+    },
+
+
+
     //   {
     //     path: '/profile',
     //     name:"profile",
@@ -101,7 +108,7 @@ const routes = [
 
 
     //   },
-     
+
 ]
 
 const router = createRouter({

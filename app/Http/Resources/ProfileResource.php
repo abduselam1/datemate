@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class UserResource extends JsonResource
+class ProfileResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -19,22 +19,31 @@ class UserResource extends JsonResource
             'name' => $this->name,
             'last_name' => $this->last_name,
             'email' => $this->email,
-            'pictures' => $this->pictures()->where('is_primary', true)->first(),
+            'pictures' => $this->pictures()->orderBy('updated_at','desc')->get(),
             'religion' => $this->info->religion,
+            'religion_id' => $this->religion_id,
             'mood' => $this->info->mood,
-            'sex' => $this->info->sex,
-            'interested_sex' => $this->info->interested_sex,
+            'sex' => $this->info->sex ? "Male" :'Female',
+            'interested_sex' => $this->info->interested_sex ? "Male" : 'Female',
             'dob' => $this->info->dob,
+            'age' => $this->info->dob->age,
             'purpose' => $this->info->purpose,
-            'job_title' => $this->info->job_title,
-            'company' => $this->info->company_name,
-            'school' => $this->info->school,
+            'education_and_work' =>[
+                'school' =>$this->info->school,
+                'job_title_id' => $this->info->job_title_id,
+                'job_title' => $this->info->jobTitle->name,
+                'company' => $this->info->company_name,
+            ],
             'education_level' => $this->info->education_level,
             'phone_number' => $this->info->phone_number,
             'bio' => $this->info->bio,
             'other' => $this->info->other,
             'height' => $this->info->height,
             'relationship' => $this->info->relationship,
+            'smoking' => $this->smoking,
+            'drinking' => $this->drinking,
+            'star' => $this->star,
+            'personality' =>$this->personality,
             'interests' => $this->interests,
             'languages' => $this->languages,
 

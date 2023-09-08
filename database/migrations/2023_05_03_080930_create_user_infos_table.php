@@ -22,7 +22,7 @@ return new class extends Migration
             $table->boolean('interested_sex'); // the same as the sex
             $table->date('dob');
             $table->string('purpose');
-            $table->string('job_title')->nullable();
+            $table->foreignId('job_title_id')->nullable()->constrained()->nullOnDelete();
             $table->string('company_name')->nullable();
             $table->string('school')->nullable();
             $table->string('education_level')->nullable();
@@ -30,7 +30,13 @@ return new class extends Migration
             $table->string('bio');
             $table->json('other')->default("{}");
             $table->double('height')->nullable();
-            $table->string('relationship')->nullable(12);
+            $table->string('star')->nullable();
+            $table->string('smoking')->nullable();
+            $table->string('drinking')->nullable();
+            $table->string('personality')->nullable();
+
+
+            $table->string('relationship')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

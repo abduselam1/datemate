@@ -20,18 +20,21 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import { faPhone } from "@fortawesome/free-solid-svg-icons";
 
 import { faUserSecret } from '@fortawesome/free-solid-svg-icons'
+import LoadingSpin from "@/Components/LoadingSpin.vue";
 
 /* add icons to the library */
 library.add(faUserSecret)
 
 // const files = require.context('./', true, /\.vue$/i)
 
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
-// console.log('---');
-// files.keys().map(key => console.log(key))
-// console.log('-----');
-
 var app = createApp(index).use(router)
+app.config.globalProperties.consts = {
+    purposeOptions: ['Here to Date','Open to chat','Ready for a relationship'],
+    stars: ['Aries','Taurus','Gimini','Cancer','Leo','Virgo','Libra','Scorpio','Sagittarius','Capricorn','Aquarius','Pisces'],
+    relationship:['Single','Taken',"It's complected",'Open'],
+    yesNo: ['Yes','No','Sometimes'],
+    educationLevels:['Less than 8th grade', 'High school', 'College diploma', 'Bachelor degree', 'Masters degree', 'PHD degree']
+}
 app.mount('#app')
 app.use(vClickOutside)
 app.component(iconLink,'iconLink')
@@ -40,6 +43,8 @@ app.component('PopupPage',PopupPage)
 app.component('switchInput',switchInput)
 app.component('SwitchConstant',SwitchConstant)
 app.component('AppBar',AppBar)
+app.component('loading-spin',LoadingSpin)
+
 
 // app.component(basic,'basic')
 // Vue.use(VueRouter);
@@ -47,17 +52,3 @@ app.component('AppBar',AppBar)
 //     routes: routes,
 //     mode: 'history'
 //   })
-
-// const app = new Vue({
-//     router,
-//     mounted(){
-
-//     },
-//     data(){
-//         return {
-//             profile:'',
-            
-//         }
-//     },
-//     el: '#app',
-// });

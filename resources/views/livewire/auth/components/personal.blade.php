@@ -17,7 +17,7 @@
                     <option value="{{$rlg->id}}">{{$rlg->name}}</option>
                 @endforeach
                 <option value="">Rather not to say</option>
-                
+
             </select>
             @error('religion') <span class="error">{{$message}}</span> @enderror
         </div>
@@ -25,17 +25,14 @@
             <label for="education" class=" text-light font-semibold">Education level</label>
             <select wire:model="education" id="education" class="block rounded-lg mt-2 border-2 border-gray-300 bg-gray-50 px-2 py-2 w-full focus:outline-brand">
                 <option value="" selected >Select Your education level</option>
-                <option value="less">Less than 8th grade</option>
-                <option value="high_school">High school</option>
-                <option value="college">College diploma</option>
-                <option value="bachelor">Bachelor degree</option>
-                <option value="masters">Masters degree</option>
-                <option value="phd">PHD degree</option>
+                @foreach($educationLevels as $educationLevel)
+                    <option value="{{ $educationLevel }}" >{{ $educationLevel }}</option>
+                @endforeach
             </select>
             @error('education') <span class="error">{{$message}}</span> @enderror
 
         </div>
-        
+
     </div>
 
     <div class="">
@@ -43,16 +40,16 @@
             <label for="education" class=" text-light font-semibold">Why you here</label>
             <select wire:model="purpose" id="education" class="block rounded-lg mt-2 border-2 border-gray-300 bg-gray-50 px-2 py-2 w-full focus:outline-brand">
                 <option value="" selected >Select Your purpose</option>
-                <option value="To date">To date</option>
-                <option value="Open to chat">Open to chat</option>
-                <option value="Ready for relationship">Ready for relationship</option>
+                @foreach ($purposes as $pr)
+                <option value="{{$pr}}" selected >{{$pr}}</option>
+                @endforeach
             </select>
             @error('purpose') <span class="error">{{$message}}</span> @enderror
 
         </div>
     </div>
-    
-    
+
+
 
     <div class="mt-3 md:flex block">
 
@@ -60,15 +57,15 @@
             <label for="employment" class=" text-light font-semibold">Employment</label>
             <select wire:model="employment" id="employment" class="block rounded-lg mt-2 border-2 border-gray-300 bg-gray-50 px-2 py-2 w-full focus:outline-brand">
                 <option value="" selected >Choose your Employment</option>
-                <option value="unemployed">Un employed</option>
-                <option value="Bussiness owner">Bussiness owner</option>
-                <option value="Government worker">Government worker</option>
-                
+                @foreach($jobTitles as $jobTitle)
+                    <option value="{{$jobTitle->id}}">{{ $jobTitle->name }}</option>
+                @endforeach
+
             </select>
             @error('employment') <span class="error">{{$message}}</span> @enderror
 
         </div>
-        
+
 
     </div>
     <div x-data="{isInputOpen:false}"  class="mt-3">
@@ -88,15 +85,15 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                             </svg>
                         </div>
-                        
-                        
+
+
                     </div>
                         {{-- <livewire:components.items :ids="$language['id']" :text="$language['name']" /> --}}
                     @endforeach
                 </div>
                 <div class="relative ">
                     <input type="text" @click.outside="isInputOpen = false"  @click="isInputOpen = true" wire:model="searchLanguage" autofocus placeholder="Search language" class=" h-2 border-2 focus:border-brand border-gray-200 outline-none rounded-lg  mt-1 px-2 py-4 w-full">
-                    
+
                         <div :class="{'hidden':!isInputOpen}" class="absolute w-full left-0 top-12">
                             @if (empty($allLanguages->toArray()))
                                 <div class=" py-5 flex justify-center px-1 bg-gray-50 rounded-lg">
@@ -105,23 +102,23 @@
                             @else
                                 <ul class="px-1 py-1 bg-gray-50 rounded-lg">
                                     @foreach ($allLanguages as $selLan)
-                                        <li wire:click="addLanguage({{$selLan->id}},)" class=" px-3 py-1 hover:bg-gray-100 cursor-pointer rounded-md " >{{$selLan->name}}</li>                                
+                                        <li wire:click="addLanguage({{$selLan->id}},)" class=" px-3 py-1 hover:bg-gray-100 cursor-pointer rounded-md " >{{$selLan->name}}</li>
                                     @endforeach
                                 </ul>
                             @endif
                         </div>
-                    
+
                 </div>
             </div>
-            
-            
+
+
         </div>
     </div>
-    
-    
+
+
     <!-- <div class="text-right mt-5 flex justify-between">
         <button class="px-4 py-1 bg-brand2 rounded-lg text-dark font-semibold" @click="$emit('changePage','-')">Previous</button>
-        <button class="px-4 py-1 bg-brand2 rounded-lg text-dark font-semibold" @click="$emit('changePage','+')" >Next</button>            
+        <button class="px-4 py-1 bg-brand2 rounded-lg text-dark font-semibold" @click="$emit('changePage','+')" >Next</button>
     </div> -->
     <div class="mb-4 flex justify-between mt-5">
         <a class=" cursor-pointer bg-gradient-to-r from-brand to-brand2 hover:outline-brand text-white font-bold py-2 px-4 rounded-full" wire:click="previous">Previous</a>

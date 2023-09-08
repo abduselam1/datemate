@@ -6,6 +6,7 @@ namespace App\Models;
 
 use App\Models\Chat\Message;
 use App\Models\User\Picture;
+use App\Models\User\Interest;
 use App\Models\User\Language;
 use App\Models\User\Location;
 use App\Models\User\UserInfo;
@@ -150,6 +151,11 @@ class User extends Authenticatable implements FilamentUser, CanResetPassword
     public function languages(): BelongsToMany
     {
         return $this->belongsToMany(Language::class);
+    }
+
+    public function interests(): BelongsToMany
+    {
+        return $this->belongsToMany(Interest::class);
     }
     
 

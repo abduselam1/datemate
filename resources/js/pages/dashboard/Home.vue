@@ -6,10 +6,10 @@
             <div class="relative flex  max-w-3xl mx-auto shadow-2xl 2xl:h-4/5 xl:max-w-5xl 2xl:max-w-7xl  w-full over h-full rounded-xl">
                 <div class="relative h-full w-3/5">
                     <img src="/media/profile-sample.jpg" class='absolute h-full w-full object-cover' alt="">
-                    <div class=" bg-gradient-to-b to-gray-900 from-transparent absolute bottom-0 h-52  left-0  w-full z-10">
-                        
+                    <div class=" bg-gradient-to-b to-gray-900 from-transparent absolute bottom-0 h-52  left-0  w-full">
+
                     </div>
-                    <div class="flex justify-evenly absolute bottom-0 py-5 left-0  w-full z-10" >
+                    <div class="flex justify-evenly absolute bottom-0 py-5 left-0  w-full" >
                         <!-- accept button -->
                         <div class=" cursor-pointer">
                             <div class=" px-3 py-3 mb-3 rounded-full bg-brand2">
@@ -27,7 +27,7 @@
 
                         <!-- regect button -->
                         <div class=" cursor-pointer">
-                            
+
                             <div class=" px-3 py-3 mb-3 rounded-full bg-red-500">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
@@ -36,16 +36,16 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="w-2/5 bg-white  pt-5 px-1 rounded-xl overflow-scroll">
                     <div class="flex justify-between items-center w-full">
                         <div class="flex items-baseline  justify-between px-2 ">
-                            
+
                                 <h3 class="text-3xl xs:text-4xl text-gray-600  font-bold font-brand">Jane Doe</h3>
-                                
-                            
+
+
                                 <span class="font-light text-xl xs:text-2xl font-brand text-gray-600 ">, 22</span>
-                            
+
                         </div>
                         <div class="px-2 rounded-lg cursor-pointer border border-gray-400 ">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7  h-7 ">
@@ -86,7 +86,7 @@
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4 text-yellow-500">
                                     <path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd" />
                                 </svg>
-                                
+
                                 <span class="ml-1">Muslim</span>
                             </div>
                             <div class="flex mt-2 items-center">
@@ -95,7 +95,7 @@
                                     <path d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z" />
                                 </svg>
 
-                                
+
                                 <span class="ml-1">Single</span>
                             </div>
 
@@ -106,18 +106,18 @@
                                 </svg>
 
 
-                                
+
                                 <span class="ml-1 sm:bg-transparent">Scorpio</span>
                             </div>
-                            
+
                         </div>
                     </div>
-                    
-                    
-                    
+
+
+
                 </div>
             </div>
-            
+
 
         </div>
 </template>
