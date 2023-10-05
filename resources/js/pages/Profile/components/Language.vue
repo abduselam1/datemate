@@ -79,7 +79,7 @@ export default {
     },
     mounted() {
         this.languages = this.allLanguages;
-        axios.get('/api/languages').
+        axios.get('/api/v1/languages').
             then((result) => {
                 this.languagesFromBackend = result.data
             const a = result.data
@@ -108,7 +108,7 @@ export default {
             for (const lang of this.languages) {
                 ids.push(lang['id'])
             }
-            axios.put('/api/user/language',{id:ids})
+            axios.put('/api/v1/user/language',{id:ids})
                 .then((result)=>{
                     this.languages = result.data
                     this.showEdit = false

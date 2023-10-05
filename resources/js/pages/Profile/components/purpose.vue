@@ -62,7 +62,7 @@ export default {
             this.showedit = false
         },
         update(){
-            axios.put('/api/user/purpose',{'purpose':this.purpose})
+            axios.put('/api/v1/user/purpose',{'purpose':this.purpose})
             .then((result) => {
                 this.showedit = false
             })

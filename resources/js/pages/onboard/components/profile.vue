@@ -1,5 +1,5 @@
 <template>
-    <div class="w-full">
+    <div x-data="{imagePreview:null,finished:@entangle('finished')}" class="w-full">
         <div class="flex justify-center mb-5 text-light">
             <div class="flex items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 h-10   ">
@@ -9,15 +9,15 @@
                 <h2 class="text-3xl font-bold text-light pl-2">Profile picture</h2>
             </div>
         </div>
-        
+    
         <div class="mt-6">
             <div class="block md:mt-0 mt-3 w-full">
-                
-                <input class="hidden" accept="image/*" id="profile" type="file" @change="previewImage">
-                <label for="profile" v-if="imagePreview" class="flex justify-center mt-4">
+            
+                <input class="hidden" accept="image/*" :model="image" id="profile" type="file" v-ref='photo' @change="previewImage">
+                <label for="profile" v-if="imagePreview" class="flex cursor-pointer justify-center mt-4">
                     <img :src="imagePreview" class="max-w-sm">
                 </label>
-                <label for="profile" v-show="!imagePreview" class="flex justify-center py-6 border-2 border-dashed rounded-lg w-full border-gray-400">
+                <label for="profile" v-show="!imagePreview" class="flex justify-center cursor-pointer py-8 border-2 border-dashed rounded-lg w-full border-gray-400">
                     <div class="">
                         <div class="flex flex-col items-center ">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 h-10 text-brand">
@@ -28,36 +28,45 @@
                         <span class="text-center w-full">Please Select a profile picture</span>
                     </div>
                 </label>
-                
-                
+            
+            
             </div>
+            <span class="error">{{ '' }}</span>
+
             <div class="mt-5">
                 <label for="bio" class="label">Bio</label>
-                <textarea class="block input" v-model="bio" id="bio" name="bio" placeholder="Enter your Bio" rows="3" required ></textarea>
+                <textarea class="block input" wire:model="bio" id="bio" name="bio" placeholder="Enter your Bio" rows="3" ></textarea>
+                <span class="error">{{ '' }}</span>
+
             </div>
         </div>
-        
-        
+    
+    
         <!-- <div class="text-right mt-5 flex justify-between">
-            <button class="px-4 py-1 bg-brand2 rounded-lg text-dark font-semibold" @click="$emit('changePage','-')">Previous</button>
-            <button class="px-4 py-1 bg-brand2 rounded-lg text-dark font-semibold" @click="$emit('changePage','+')" >Next</button>            
-        </div> -->
-        <div class="mb-4 flex justify-between mt-5">
-            <button class="bg-gradient-to-r from-brand to-brand2 hover:outline-brand2 text-white font-bold py-2 px-4 rounded-full" @click.prevent="$emit('prevPage')">Previous</button>
-            <button class="bg-gradient-to-r from-brand to-brand2 hover:outline-brand2 text-white font-bold py-2 px-4 rounded-full " @click.prevent="finish">Finish</button>
+        <button class="px-4 py-1 bg-brand2 rounded-lg text-dark font-semibold" @click="$emit('changePage','-')">Previous</button>
+        <button class="px-4 py-1 bg-brand2 rounded-lg text-dark font-semibold" @click="$emit('changePage','+')" >Next</button>            
+    </div> -->
+        <div x-show="! finished" class="mb-4 flex justify-between mt-5">
+            <a wire:click="prev" class=" cursor-pointer bg-gradient-to-r from-brand to-brand2 hover:outline-brand2 text-white font-bold py-2 px-4 rounded-full" >Previous</a>
+            <a wire:click="submit" class=" cursor-pointer bg-gradient-to-r from-brand to-brand2 hover:outline-brand2 text-white font-bold py-2 px-4 rounded-full " >Finish</a>
+        </div>
+        <div x-show="finished" class="mb-4 mt-5 flex justify-end">
+            <a wire:click="finish" class=" cursor-pointer bg-gradient-to-r from-brand to-brand2 hover:outline-brand2 text-white font-bold py-2 px-4 rounded-full">submit</a>
+
         </div>
     </div>
 </template>
 
 <script>
-import items from './../../components/items.vue'
-import multiselect from './../../components/Multiselect.vue'
+import items from '../../components/items.vue'
+import multiselect from '../../components/Multiselect.vue'
 export default {
     components:{items,multiselect},
     data(){
         return {
             profile:'',
             bio:'',
+            image:'',
             // previewImage:null,
             imagePreview:null
         }

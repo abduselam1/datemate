@@ -188,7 +188,7 @@ export default {
         this.religion = this.info.religion['name']
         this.religionId = this.info.religion.id
 
-        axios.get('/api/religion')
+        axios.get('/api/v1/religion')
             .then((result) => {
                 this.religions = result.data
 
@@ -229,7 +229,7 @@ export default {
                 personality: this.personality
             }
 
-            axios.put('/api/user/info',data)
+            axios.put('/api/v1/user/info',data)
                 .then((result) => {
                     this.$emit('newData',result.data.data)
                     this.isLoading = false

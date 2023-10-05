@@ -105,7 +105,7 @@ export default {
         },
         deletePicture(id){
 
-            axios.delete('/api/picture/'+id)
+            axios.delete('/api/v1/picture/'+id)
                 .then((result) => {
 
                     this.pictures = result.data
@@ -124,7 +124,7 @@ export default {
 
             data.append('picture',this.newProfileImage);
 
-            axios.post('/api/picture',data)
+            axios.post('/api/v1/picture',data)
                 .then((result) => {
                     this.pictures = result.data
                     this.isloading = false
@@ -145,7 +145,7 @@ export default {
         {
             const data = new FormData;
             data.append('is_primary',true)
-            axios.put('/api/picture/'+id, {'is_primary':true})
+            axios.put('/api/v1/picture/'+id, {'is_primary':true})
                 .then((result) => {
                     console.log(result)
                     this.pictures = result.data

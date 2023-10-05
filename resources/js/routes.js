@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import home from './pages/dashboard/Home.vue'
+import AuthenticatedLayout from './Layouts/AuthenticatedLayout.vue'
 import login from './pages/auth/Login.vue'
 import register from './pages/auth/Register.vue'
 import forgot from './pages/auth/ForgotPassword.vue'
@@ -16,69 +17,85 @@ import swipe from './pages/dashboard/swipe.vue'
 import Matchs from "@/pages/matchs/Matchs.vue";
 
 const routes = [
+
     {
-        path: '/',
-        name:"home",
-        component: home,
-        meta: {
-          title: 'Home Page - Dating',
-          metaTags: [
-            {
-              name: 'description',
-              content: 'Handmed is the best way to connect to real professional doctors and pyschatrist to get the correct information and also to communicate with them.'
-            },
-            {
-              property: 'og:description',
-              content: 'Handmed is the best way to connect to real professional doctors and pyschatrist to get the correct information and also to communicate with them.'
-            }
-          ]
-        }
-      },
-      // {
-      //   path: '/login',
-      //   name:"login",
-      //   component: login,
-      // },
-      // {
-      //   path: '/register',
-      //   name:"register",
-      //   component: register
-      // },
-      {
-        path: '/forgot-password',
-        name:"forgot-password",
-        component: change
-      },
-      // {
-      //   path: '/onboard',
-      //   name:"onboard",
-      //   component: wizard
-      // },
-      {
-        path: '/setting',
-        name:"setting",
-        component: setting
-      },
-      {
-        path: '/message',
-        name:"message",
-        component: message
-      },
-      {
-        path: '/profile',
-        name:"profile",
-        component: profile
-      },
-      {
-        path:'/notifications',
-        name:'notification',
-        component:notification
-      },
-    {
-        path:'/matchs',
-        name: 'matchs',
-        component: Matchs
+		path: '/login',
+		name:"login",
+		component: login,
     },
+    {
+		path: '/register',
+		name:"register",
+		component: register
+    },
+    {
+		path: '/forgot-password',
+		name:"forgot-password",
+		component: change
+    },
+
+    {
+		path: '/onboard',
+		name:"onboard",
+		component: wizard
+    },
+    
+    {
+      	path:'',
+      	component: AuthenticatedLayout, 
+      	children:[
+
+			{
+				path: '/',
+				name:"home",
+				component: home,
+				meta: {
+					title: 'Home Page - Dating',
+					metaTags: [
+						{
+							name: 'description',
+							content: 'Handmed is the best way to connect to real professional doctors and pyschatrist to get the correct information and also to communicate with them.'
+						},
+						{
+							property: 'og:description',
+							content: 'Handmed is the best way to connect to real professional doctors and pyschatrist to get the correct information and also to communicate with them.'
+						}
+					]
+				}
+			},
+			
+			{
+				path: '/setting',
+				name:"setting",
+				component: setting
+			},
+			{
+				path: '/message',
+				name:"message",
+				component: message
+			},
+			{
+				path: '/profile',
+				name:"profile",
+				component: profile
+			},
+			{
+				path:'/notifications',
+				name:'notification',
+				component:notification
+			},
+			{
+				path:'/matchs',
+				name: 'matchs',
+				component: Matchs
+			},
+			
+			
+			
+      	]
+      
+    },
+
 
 
 

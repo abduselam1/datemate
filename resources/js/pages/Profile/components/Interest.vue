@@ -64,7 +64,7 @@ export default {
 
     mounted() {
         this.allInterests = this.interests;
-        axios.get('/api/interests').
+        axios.get('/api/v1/interests').
         then((result) => {
 
             this.interestsFromBackend = result.data
@@ -117,7 +117,7 @@ export default {
             for (const lang of this.allInterests) {
                 ids.push(lang['id'])
             }
-            axios.put('/api/user/interest',{id:ids})
+            axios.put('/api/v1/user/interest',{id:ids})
                 .then((result)=>{
                     this.allInterests = result.data
                     this.showEdit = false

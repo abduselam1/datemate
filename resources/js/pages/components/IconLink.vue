@@ -15,6 +15,7 @@
 
 <script>
 export default {
+    name:"IconLink",
     props:['to','class','count']
 }
 </script>

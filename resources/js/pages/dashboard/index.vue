@@ -241,7 +241,7 @@ export default {
         }
     },
     mounted(){
-        axios.get('/api/user').then((result) => {
+        axios.get('/api/v1/user').then((result) => {
 
         }).catch((err) => {
             console.warn(err);
@@ -266,7 +266,7 @@ export default {
         },
         submitReport(){},
         logout(){
-            axios.get('/api/logout').then((result) => {
+            axios.get('/api/v1/logout').then((result) => {
                 if(result){
                     window.location.replace('/login');
                 }

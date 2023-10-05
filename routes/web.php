@@ -38,19 +38,34 @@ use PragmaRX\Countries\Package\Countries;
 
 // Route::view('/setting', 'app');
 
-Route::get('login', Login::class)->name('login')->middleware('guest');
+Route::group(['middleware' => 'guest'],function(){
 
-Route::get('register', Register::class)->name('register')->middleware('guest');
+    Route::get('login', function(){
+        return view('app');
+    })->name('login')->middleware('guest');
+    
+    Route::get('register', function(){
+        return view('app');
+    })->name('register')->middleware('guest');
 
-Route::get('onboard',Onboard::class)->name('onboard')->middleware('auth');
+    Route::get('reset-password/{token}', function(){
+        return view('app');
+    })->name('password.reset')->middleware('guest');
+    
+    Route::get('forgot-password', function(){
+        return view('app');
+    })->name('forgot-password')->middleware('guest');
+});
 
-Route::get('reset-password/{token}', ResetPassword::class)->name('password.reset')->middleware('guest');
+
+
+Route::view('onboard','app')->name('onboard')->middleware('auth');
+
 
 Route::get('asd',function(){
     dd(session()->getId());
 })->name('success');
 
-Route::get('forgot-password', ForgotPassword::class)->name('forgot-password')->middleware('guest');
 
 
 Route::get('geo',function(){

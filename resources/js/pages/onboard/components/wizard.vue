@@ -30,7 +30,7 @@
 <script>
 import basic from './Basic.vue'
 import personal from './Personal.vue'
-import profile from './ProfilePicture.vue'
+import profile from './profile.vue'
 export default {
   components:{basic,personal,profile},
   

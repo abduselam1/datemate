@@ -87,7 +87,7 @@ export default {
         this.company = this.data['company']
         this.newJobTitle = this.data['job_title_id']
         this.title = this.data['job_title']
-        axios.get('/api/job-title')
+        axios.get('/api/v1/job-title')
             .then((result) => {
                this.jobTitles = result.data
             })
@@ -113,7 +113,7 @@ export default {
         save(){
             this.isLoading = true
 
-            axios.put('/api/user/education-and-work',{job_title:this.newJobTitle,company:this.company,school:this.school})
+            axios.put('/api/v1/user/education-and-work',{job_title:this.newJobTitle,company:this.company,school:this.school})
                 .then((result)=>{
                     console.log(result.data)
                     this.school = result.data.data['school']

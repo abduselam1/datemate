@@ -20,8 +20,6 @@
     <body class="no-scrollbar bg-gray-100 h-full font-bran">
         <div id="app">  
         </div>
-        <div class=" mx-auto max-w-md">
-
-        </div>
+        
     </body>
 </html>
