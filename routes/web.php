@@ -62,12 +62,6 @@ Route::group(['middleware' => 'guest'],function(){
 Route::view('onboard','app')->name('onboard')->middleware('auth');
 
 
-Route::get('asd',function(){
-    dd(session()->getId());
-})->name('success');
-
-
-
 Route::get('geo',function(){
     // return Geo::getCountries();               // Get a Collection of all countries
     // Geo::getCountry('US');             // Get item by Country code

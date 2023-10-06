@@ -74,10 +74,10 @@
                 <label for="language" class=" text-light font-semibold">Select a Language you speak</label>
                 <div class="w-full focus-within:outline-brand  mt-2 pb-2 border-gray-300 rounded-lg group px-2 pt-2">
                     <div x-click='isInputOpen = !isInputOpen' class="flex">
-                        @foreach ($languages as $language)
-                        <div class="flex mb-1 mr-1">
+                        
+                        <div v-for="lng in languages" :key="lng['id']" class="flex mb-1 mr-1">
                             <div class="px-2 py-1 bg-brand opacity-50 flex items-center rounded-full text-dark">
-                                <span class="text-sm text-white pr-2">{{ $language['native'] ?? $language['name'] }}</span>
+                                <span class="text-sm text-white pr-2">{{ lng['native_name'] ?? lng['name'] }}</span>
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white cursor-pointer"  fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                                 </svg>
@@ -85,7 +85,7 @@
 
 
                         </div>
-                        @endforeach
+                        
                     </div>
                     <!-- <div class="relative ">
                         <input type="text"   @click="isInputOpen = true" wire:model="searchLanguage" autofocus placeholder="Search language" class=" h-2 border-2 focus:border-brand border-gray-200 outline-none rounded-lg  mt-1 px-2 py-4 w-full">
@@ -127,7 +127,6 @@ export default {
     data(){
         return {
             selectedLanguages:[],
-            languages:['Amharic','English','Afar','Arabic','Oromiffa','france','Spanish','Tigregna'],
             isInputOpen:false,
             religion:'',
             education:'',

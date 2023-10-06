@@ -47,8 +47,6 @@ Route::group(['prefix' => 'v1'],function(){
     
         Route::put('picture/{picture}',[PictureController::class,'edit'])->name('picture.edit');
     
-        Route::get('languages',[LanguageController::class,'index']);
-    
         Route::put('user/language', [UserController::class, 'editLanguage']);
     
         Route::put('user/purpose', [UserController::class, 'editPurpose']);
@@ -86,6 +84,7 @@ Route::group(['prefix' => 'v1'],function(){
     });
     
     Route::get('countries',[CountryController::class,'index']);
-    
+
+    Route::get('languages', [LanguageController::class, 'index']);
     Route::get('countries/{country}',[CountryController::class,'show']);
 });

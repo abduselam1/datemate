@@ -43,6 +43,11 @@ app.config.globalProperties.consts = {
         return result.data
     }).catch((err) => {
         return [];
+    }),
+    languages: axios.get('/api/v1/languages').then((result) =>{
+        return result.data;
+    }).catch(err => {
+        return [];
     })
 }
 app.mount('#app')

@@ -44,7 +44,7 @@
                 </div>
                 
                 <div class="flex justify-center">
-                    <span class="text-center text-gray-400 font-semibold text-sm">Don't have and Account? <router-link :to="{name:'register'}" class="text-brand" >Register</router-link> </span>
+                    <span class="text-center text-gray-400 font-semibold text-sm">Don't have and Account? <router-link :to="{name:'register',replace:true}" class="text-brand" >Register</router-link> </span>
                 </div>
             </form>
 
@@ -64,7 +64,7 @@
 
 import { useVuelidate } from '@vuelidate/core'
 import { required, email,helpers } from '@vuelidate/validators'
-import axios from 'axios'
+
 
 export default {
 

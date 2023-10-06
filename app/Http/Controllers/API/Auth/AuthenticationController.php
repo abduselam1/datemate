@@ -36,10 +36,11 @@ class AuthenticationController extends Controller
 
     public function register(Request $request)
     {
+        // return response($request->ip(),500);
         $request->validate([
                 'name' => ['required'],
                 'last_name' => ['required'],
-                'email' => ['required', 'email',],
+                'email' => ['required', 'email','unique:users'],
                 'password' => ['required', Password::min(8)->mixedCase()->numbers()->symbols()]
 
             ],
