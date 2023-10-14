@@ -124,10 +124,9 @@
 
 <script>
 import Badge from '../components/Badge.vue'
-import iconLink from './../components/IconLink.vue'
 import mobileHome from './MobileHome.vue'
 export default {
-    components:{iconLink,mobileHome,Badge},
+    components:{mobileHome,Badge},
     methods:{
     }
 

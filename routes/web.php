@@ -76,6 +76,9 @@ Route::get('geo',function(){
 
 
 Route::group(['middleware'=>['auth', 'check.account']],function(){
+
+    Route::redirect('', '/home', 301);
+
     Route::get('/{any}', function () {
         return view('app');
     })->where('any', '.*');

@@ -71,9 +71,9 @@
 </template>
 
 <script>
-import iconLink from './../components/IconLink.vue'
+
 export default {
-    components:{iconLink},
+
     methods:{
     }
 

@@ -56,19 +56,6 @@ async function callApi(endpoint){
     return data;
 }
 
-async function countries(){
-    var a = [];
-    await axios.get('/api/v1/countries').then((result) =>{
-        
-        a = result.data;
-
-    });
-    console.log("=====");
-    console.log(a);
-    
-    return a;
-}
-
 app.mount('#app')
 app.use(vClickOutside)
 app.component(iconLink,'iconLink')
