@@ -22,7 +22,6 @@ import { faPhone } from "@fortawesome/free-solid-svg-icons";
 
 import { faUserSecret } from '@fortawesome/free-solid-svg-icons'
 import LoadingSpin from "@/Components/LoadingSpin.vue";
-// import Select2 from 'vue3-select2-component';
 
 /* add icons to the library */
 library.add(faUserSecret)
@@ -39,17 +38,37 @@ app.config.globalProperties.consts = {
     relationship:['Single','Taken',"It's complected",'Open'],
     yesNo: ['Yes','No','Sometimes'],
     educationLevels:['Less than 8th ,grade', 'High school', 'College diploma', 'Bachelor degree', 'Masters degree', 'PHD degree'],
-    countries: axios.get('api/v1/countries').then((result) => {
-        return result.data
-    }).catch((err) => {
-        return [];
-    }),
-    languages: axios.get('/api/v1/languages').then((result) =>{
-        return result.data;
-    }).catch(err => {
-        return [];
-    })
+    data: await callApi('init'),
+    // countries: await callApi('countries'),
+    // languages: await callApi('languages'),
+    // religions: await callApi('religions'),
+    // jobTitles: await callApi('job-titles'),
 }
+
+async function callApi(endpoint){
+    var data = [];
+    await axios.get('/api/v1/'+endpoint).then((result) =>{
+        console.log(result.data);
+        data = result.data;
+
+    });
+    
+    return data;
+}
+
+async function countries(){
+    var a = [];
+    await axios.get('/api/v1/countries').then((result) =>{
+        
+        a = result.data;
+
+    });
+    console.log("=====");
+    console.log(a);
+    
+    return a;
+}
+
 app.mount('#app')
 app.use(vClickOutside)
 app.component(iconLink,'iconLink')
@@ -59,7 +78,6 @@ app.component('switchInput',switchInput)
 app.component('SwitchConstant',SwitchConstant)
 app.component('AppBar',AppBar)
 app.component('loading-spin',LoadingSpin)
-// app.component('Select2', Select2)
 
 // app.component(basic,'basic')
 // Vue.use(VueRouter);

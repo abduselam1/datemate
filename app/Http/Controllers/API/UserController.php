@@ -2,18 +2,20 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\UserInfoRequest;
-use App\Http\Resources\EducationAndWorkResource;
-use App\Http\Resources\ProfileResource;
-use App\Http\Resources\UserResource;
-use App\Models\Chat\Conversation;
-use App\Models\Chat\Message;
 use App\Models\User;
+use App\Models\Chat\Message;
+use Illuminate\Http\Request;
 use App\Models\User\Interest;
 use App\Models\User\JobTitle;
+use App\Models\User\Language;
+use App\Models\Chat\Conversation;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Resources\UserResource;
+use App\Http\Requests\UserInfoRequest;
+use App\Http\Resources\ProfileResource;
+use PragmaRX\Countries\Package\Countries;
+use App\Http\Resources\EducationAndWorkResource;
 
 class UserController extends Controller
 {
@@ -41,8 +43,8 @@ class UserController extends Controller
         $request->validate([
             'id' => 'required'
         ]);
-        //        dd($request->id);
-        auth()->user()->languages()->sync($request->input('id'));
+        $user = User::find(auth()->id());
+        $user->languages()->sync($request->input('id'));
         return response(auth()->user()->languages);
     }
 
@@ -52,8 +54,8 @@ class UserController extends Controller
         $request->validate([
             'purpose' => 'required'
         ]);
-
-        auth()->user()->info()->update([
+        $user = User::find(auth()->id());
+        $user->info()->update([
             'purpose' => $request->purpose
         ]);
 
@@ -73,7 +75,8 @@ class UserController extends Controller
             'id' => 'required'
         ]);
 
-        auth()->user()->interests()->sync($request->id);
+        $user = User::find(auth()->id());
+        $user->interests()->sync($request->id);
 
         return response(true);
     }
@@ -99,8 +102,8 @@ class UserController extends Controller
             'school' => 'sometimes',
             'company' => 'sometimes',
         ]);
-
-        auth()->user()->info()->update([
+        $user = User::find(auth()->id());
+        $user->info()->update([
             'school' => $request->school,
             'job_title_id' => $request->job_title,
             'company_name' => $request->company
@@ -112,11 +115,34 @@ class UserController extends Controller
 
     public function editUser(UserInfoRequest $request)
     {
+        $user = User::find(auth()->id());
 
-        auth()->user()->info()->update($request->all());
+        $user->info()->update($request->all());
 
         $user = User::find(auth()->id());
 
         return new ProfileResource($user);
+    }
+
+    public function init()
+    {
+        $title = JobTitle::orderBy('name')->get();
+
+        $religions = User\Religion::orderBy('name')->get();
+
+        $languages = Language::get(['id','name']);
+
+        $countries = Countries::all();
+        $name = [];
+        foreach ($countries as $key => $country) {
+            $name[$key] = $country['name']['common'];
+        }
+        return response([
+            'jobTitles' => $title,
+            'religions' => $religions,
+            'languages' => $languages,
+            'countries' => $name
+        ]);
+        
     }
 }

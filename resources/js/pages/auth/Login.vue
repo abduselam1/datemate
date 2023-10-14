@@ -88,7 +88,7 @@ export default {
                 return;
             }
             this.isLoading  = true
-            axios.post('/api/v1/login',{email:this.mail,password:this.password}).then((result) => {
+            axios.post('/api/v1/login',{email:this.mail,password:this.password,remember: this.remember}).then((result) => {
 
                 // console.log(result.data);
                 
@@ -97,6 +97,7 @@ export default {
                     if(result.data.info == null){
 
                         this.$router.push({name:'onboard',replace:true})
+                        return;
                     }
                     this.$router.push({name:'home', replace: true})
                 }
@@ -110,7 +111,7 @@ export default {
                     this.serverError = err.response.data.message
                 }
                 else {
-                    this.serverError = "Something went wrong please try again from catch"
+                    this.serverError = "Something went wrong please try again"
                 }
                 this.isLoading = false;
             })

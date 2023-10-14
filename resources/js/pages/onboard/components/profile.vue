@@ -13,7 +13,7 @@
         <div class="mt-6">
             <div class="block md:mt-0 mt-3 w-full">
             
-                <input class="hidden" accept="image/*" :model="image" id="profile" type="file" v-ref='photo' @change="previewImage">
+                <input class="hidden" accept="image/*" id="profile" type="file" @change="previewImage">
                 <label for="profile" v-if="imagePreview" class="flex cursor-pointer justify-center mt-4">
                     <img :src="imagePreview" class="max-w-sm">
                 </label>
@@ -31,12 +31,12 @@
             
             
             </div>
-            <span class="error">{{ '' }}</span>
+            <span v-for="error in v$.image.$errors" :key="error.$uid" class="error">{{ error.$message }}</span>
 
             <div class="mt-5">
                 <label for="bio" class="label">Bio</label>
-                <textarea class="block input" wire:model="bio" id="bio" name="bio" placeholder="Enter your Bio" rows="3" ></textarea>
-                <span class="error">{{ '' }}</span>
+                <textarea class="block input" v-model="bio" id="bio" name="bio" placeholder="Enter your Bio" rows="3" ></textarea>
+                <span v-for="error in v$.bio.$errors" :key="error.$uid" class="error">{{ error.$message }}</span>
 
             </div>
         </div>
@@ -46,48 +46,91 @@
         <button class="px-4 py-1 bg-brand2 rounded-lg text-dark font-semibold" @click="$emit('changePage','-')">Previous</button>
         <button class="px-4 py-1 bg-brand2 rounded-lg text-dark font-semibold" @click="$emit('changePage','+')" >Next</button>            
     </div> -->
-        <div x-show="! finished" class="mb-4 flex justify-between mt-5">
-            <a wire:click="prev" class=" cursor-pointer bg-gradient-to-r from-brand to-brand2 hover:outline-brand2 text-white font-bold py-2 px-4 rounded-full" >Previous</a>
-            <a wire:click="submit" class=" cursor-pointer bg-gradient-to-r from-brand to-brand2 hover:outline-brand2 text-white font-bold py-2 px-4 rounded-full " >Finish</a>
+        <div v-if="!isFinal" class="mb-4 flex justify-between mt-5">
+            <a @click="prev" class=" cursor-pointer bg-gradient-to-r from-brand to-brand2 hover:outline-brand2 text-white font-bold py-2 px-4 rounded-full" >Previous</a>
+            <a @click="submit" class=" cursor-pointer bg-gradient-to-r from-brand to-brand2 hover:outline-brand2 text-white font-bold py-2 px-4 rounded-full " >Next</a>
         </div>
-        <div x-show="finished" class="mb-4 mt-5 flex justify-end">
-            <a wire:click="finish" class=" cursor-pointer bg-gradient-to-r from-brand to-brand2 hover:outline-brand2 text-white font-bold py-2 px-4 rounded-full">submit</a>
-
-        </div>
+        
     </div>
 </template>
 
 <script>
 import items from '../../components/items.vue'
 import multiselect from '../../components/Multiselect.vue'
+import { useVuelidate } from '@vuelidate/core'
+import { required, helpers } from '@vuelidate/validators'
 export default {
     components:{items,multiselect},
+    mounted(){
+        console.log("mounted");
+        console.log(this.data);
+        
+    },
+    props:{
+        data:{
+            default:{},
+            isFinal:false
+        }
+    },
     data(){
         return {
+            v$: useVuelidate(),
             profile:'',
             bio:'',
             image:'',
-            // previewImage:null,
-            imagePreview:null
+            imagePreview:null,
+            allData:{},
+            isFinal:false
+        }
+    },
+    watch: {
+        data(newData) {
+            this.allData = {
+                ...this.data,
+                ...this.allData
+            }
         }
     },
     methods:{
-        finish(){
-            console.log(this.bio);
-            console.log(this.imagePreview);
-
-            this.$emit('finish')
+        prev(){
+            // console.log(this.allData)
+            this.$emit('prevPage')
+        },
+        submit(){
+            this.v$.$validate()
+            if(this.v$.$error){
+                console.log("Not validated");
+            }else{
+                console.log("validated");
+                let data = {
+                    bio:this.bio,
+                    image: this.image
+                }
+                this.$emit('nextPage',data)
+                this.isFinal = true
+            }
+            
         },
 
       previewImage(event) {
-        const file = event.target.files[0]
+        this.image = event.target.files[0]
         const reader = new FileReader()
 
         reader.onload = (event) => {
             this.imagePreview = event.target.result
         }
 
-        reader.readAsDataURL(file)
+        reader.readAsDataURL(this.image)
+        }
+    },
+    validations(){
+        return {
+            image:{
+                required: helpers.withMessage("Image is required", required)
+            },
+            bio:{
+                required: helpers.withMessage("Bio is required", required)
+            }
         }
     }
 }

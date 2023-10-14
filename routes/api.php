@@ -59,9 +59,7 @@ Route::group(['prefix' => 'v1'],function(){
     
         Route::get('interests',[UserController::class,'interestIndex']);
     
-        Route::get('job-title',[UserController::class,'jobTitleIndex']);
-    
-        Route::get('religion',[UserController::class,'religionIndex']);
+        
     
     
     
@@ -82,9 +80,8 @@ Route::group(['prefix' => 'v1'],function(){
         event(new NewMessageHasRecievedEvent($user));
         return [true];
     });
-    
-    Route::get('countries',[CountryController::class,'index']);
 
-    Route::get('languages', [LanguageController::class, 'index']);
     Route::get('countries/{country}',[CountryController::class,'show']);
+
+    Route::get('init',[UserController::class,'init']);
 });

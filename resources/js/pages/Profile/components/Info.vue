@@ -82,7 +82,7 @@
                     <select id="relationship" v-model="relationship" class=" col-span-3 setting-input">
                         <!--                        <option value="">Select your star sign</option>-->
 
-                        <option v-for="star in consts.relationship" :value="star">{{ star }}</option>
+                        <option v-for="star in consts.relationship" :key="star" :value="star">{{ star }}</option>
 
                         <option selected :value="null">I would rather not to say</option>
 

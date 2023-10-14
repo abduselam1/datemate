@@ -11,6 +11,6 @@ class LanguageController extends Controller
 {
     function index()
     {
-        return response(Language::get(['id','name','native_name']),200);
+        return response(Language::get(['id','name']),200);
     }
 }

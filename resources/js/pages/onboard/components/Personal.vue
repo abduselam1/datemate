@@ -12,25 +12,25 @@
         <div class=" mt-3 block md:flex w-full">
             <div class="block w-full mr-2">
                 <label for="religion" class=" text-light font-semibold">Your religion</label>
-                <select wire:model="religion" id="religion" class="block rounded-lg mt-2 border-2 border-gray-300 bg-gray-50 px-2 py-2 w-full focus:outline-brand">
+                <select v-model="religion" id="religion" class="block rounded-lg mt-2 border-2 border-gray-300 bg-gray-50 px-2 py-2 w-full focus:outline-brand">
                     <option value="" selected>Select Your religion</option>
                     
-                        <option v-for="rlg in religions" :key="rlg.id" :value="rlg.id">{{ rlg.name }}</option>
+                        <option v-for="rlg in consts.data.religions" :key="rlg.id" :value="rlg.id">{{ rlg.name }}</option>
                     
-                    <option value="">Rather not to say</option>
+                    <option value="0">Rather not to say</option>
 
                 </select>
-                <span class="error">{{ '' }}</span>
+                <span v-for="error in v$.religion.$errors" :key="error.$uid" class="error">{{ error.$message }}</span>
             </div>
             <div class="block md:mt-0 mt-3 w-full">
                 <label for="education" class=" text-light font-semibold">Education level</label>
-                <select wire:model="education" id="education" class="block rounded-lg mt-2 border-2 border-gray-300 bg-gray-50 px-2 py-2 w-full focus:outline-brand">
+                <select v-model="education" id="education" class="block rounded-lg mt-2 border-2 border-gray-300 bg-gray-50 px-2 py-2 w-full focus:outline-brand">
                     <option value="" selected >Select Your education level</option>
                     
-                        <option v-for="educationLevel in educationLevels" :key="educationLevel" value="{{ $educationLevel }}" >{{ $educationLevel }}</option>
+                        <option v-for="educationLevel in consts.educationLevels" :key="educationLevel" :value="educationLevel" >{{ educationLevel }}</option>
                     
                 </select>
-                 <span class="error">{{ $message }}</span>
+                <span v-for="error in v$.education.$errors" :key="error.$uid" class="error">{{ error.$message }}</span>
 
             </div>
 
@@ -38,14 +38,14 @@
 
         <div class="">
             <div class="block mt-5 w-full">
-                <label for="education" class=" text-light font-semibold">Why you here</label>
-                <select wire:model="purpose" id="education" class="block rounded-lg mt-2 border-2 border-gray-300 bg-gray-50 px-2 py-2 w-full focus:outline-brand">
+                <label for="purpose" class=" text-light font-semibold">Why you here</label>
+                <select v-model="purpose" id="purpose" class="block rounded-lg mt-2 border-2 border-gray-300 bg-gray-50 px-2 py-2 w-full focus:outline-brand">
                     <option value="" selected >Select Your purpose</option>
                     
-                    <option v-for="pr in purposeOptions" :key="pr" :value="pr" >{{ $pr }}</option>
+                    <option v-for="pr in consts.purposeOptions" :key="pr" :value="pr" >{{ pr }}</option>
                     
                 </select>
-                <span class="error">{{ '' }}</span>
+                <span v-for="error in v$.purpose.$errors" :key="error.$uid" class="error">{{ error.$message }}</span>
 
             </div>
         </div>
@@ -56,14 +56,14 @@
 
             <div class="block w-full mr-2">
                 <label for="employment" class=" text-light font-semibold">Employment</label>
-                <select wire:model="employment" id="employment" class="block rounded-lg mt-2 border-2 border-gray-300 bg-gray-50 px-2 py-2 w-full focus:outline-brand">
+                <select v-model="employment" id="employment" class="block rounded-lg mt-2 border-2 border-gray-300 bg-gray-50 px-2 py-2 w-full focus:outline-brand">
                     <option value="" selected >Choose your Employment</option>
                     
-                        <!-- <option v-for="" value="{{$jobTitle->id}}">{{ $jobTitle -> name }}</option> -->
+                        <option v-for="jobTitle in consts.data.jobTitles" :key="jobTitle['id']" :value="jobTitle['id']">{{ jobTitle['name'] }}</option>
                     
 
                 </select>
-                <span class="error">{{ $message }}</span>
+                <span v-for="error in v$.employment.$errors" :key="error.$uid" class="error">{{ error.$message }}</span>
 
             </div>
 
@@ -73,70 +73,87 @@
             <div class="block md:mt-0 mt-3 w-full">
                 <label for="language" class=" text-light font-semibold">Select a Language you speak</label>
                 <div class="w-full focus-within:outline-brand  mt-2 pb-2 border-gray-300 rounded-lg group px-2 pt-2">
-                    <div x-click='isInputOpen = !isInputOpen' class="flex">
-                        
-                        <div v-for="lng in languages" :key="lng['id']" class="flex mb-1 mr-1">
-                            <div class="px-2 py-1 bg-brand opacity-50 flex items-center rounded-full text-dark">
-                                <span class="text-sm text-white pr-2">{{ lng['native_name'] ?? lng['name'] }}</span>
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white cursor-pointer"  fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                                </svg>
-                            </div>
-
-
-                        </div>
-                        
-                    </div>
-                    <!-- <div class="relative ">
-                        <input type="text"   @click="isInputOpen = true" wire:model="searchLanguage" autofocus placeholder="Search language" class=" h-2 border-2 focus:border-brand border-gray-200 outline-none rounded-lg  mt-1 px-2 py-4 w-full">
-
-                            <div :class="{ 'hidden': !isInputOpen }" class="absolute w-full left-0 top-12">
-                                @if (empty($allLanguages->toArray()))
-                                    <div class=" py-5 flex justify-center px-1 bg-gray-50 rounded-lg">
-                                        <span>No Language found</span>
-                                    </div>
-                                @else
-                                    <ul class="px-1 py-1 bg-gray-50 rounded-lg">
-                                        @foreach ($allLanguages as $selLan)
-                                            <li wire:click="addLanguage({{$selLan->id}},)" class=" px-3 py-1 hover:bg-gray-100 cursor-pointer rounded-md " >{{ $selLan -> name }}</li>
-                                        @endforeach
-                                    </ul>
-                                @endif
-                            </div>
-
-                    </div> -->
+                    
+                    <Select2 v-model="languages" :multiple="true"  :items="consts.data.languages"  />
+                    
                 </div>
 
+                <span v-for="error in v$.languages.$errors" :key="error.$uid" class="error">{{ error.$message }}</span>
 
             </div>
         </div>
 
         <div class="mb-4 flex justify-between mt-5">
-            <a class=" cursor-pointer bg-gradient-to-r from-brand to-brand2 hover:outline-brand text-white font-bold py-2 px-4 rounded-full" wire:click="previous">Previous</a>
-            <a class=" cursor-pointer bg-gradient-to-r from-brand to-brand2 hover:outline-brand text-white font-bold py-2 px-4 rounded-full " wire:click="submit">Next</a>
+            <a class=" cursor-pointer bg-gradient-to-r from-brand to-brand2 hover:outline-brand text-white font-bold py-2 px-4 rounded-full" @click="previous">Previous</a>
+            <a class=" cursor-pointer bg-gradient-to-r from-brand to-brand2 hover:outline-brand text-white font-bold py-2 px-4 rounded-full " @click="next">Next</a>
         </div>
     </div>
 </template>
 
 <script>
-import axios from 'axios'
+
+import {useVuelidate} from '@vuelidate/core'
+import {required, helpers} from '@vuelidate/validators'
+
 import items from './../../components/items.vue'
 import multiselect from './../../components/Multiselect.vue'
+import Select2 from './../../components/select2.vue'
 export default {
-    components:{items,multiselect},
+    components:{items,multiselect,Select2},
+    mounted(){
+        console.log("consts.data.languages");
+        console.log(this.consts.data.languages);
+    },
     data(){
         return {
-            selectedLanguages:[],
+            v$:useVuelidate(),
+            languages:[],
             isInputOpen:false,
             religion:'',
             education:'',
             height:'',
-            employment:''
+            employment:'',
+            purpose:'',
+            s:['asdf','rtw','efg']
         }
     },
     methods:{
         handleOutside(e){
             this.isInputOpen = !this.isInputOpen
+        },
+        next(){
+            
+            this.v$.$validate()
+            if(this.v$.$error){
+            
+                return;
+            }else{
+                var data ={
+                    languages:this.languages, 
+                    religion:this.religion, 
+                    education:this.education, 
+                    employment:this.employment, 
+                    purpose:this.purpose
+                }
+                this.$emit('nextPage',data)
+                
+            }
+            
+        },
+        previous(){
+            // console.log('pe');
+            this.$emit('prevPage')
+        }
+    },
+    validations(){
+        return {
+            languages:{required},
+            religion: {required},
+            education:{required},
+            employment: {required},
+            purpose:{required},
+
+
         }
     }
 }

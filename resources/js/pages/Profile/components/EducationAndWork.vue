@@ -52,7 +52,7 @@
                 <select v-model="newJobTitle" class=" col-span-3 setting-input">
                     <option value="">Select your job title</option>
 
-                    <option v-for="jobTitle in jobTitles" :value="jobTitle['id']">{{ jobTitle['name'] }}</option>
+                    <option v-for="jobTitle in jobTitles" :key="jobTitle['id']" :value="jobTitle['id']">{{ jobTitle['name'] }}</option>
 
                 </select>
             </div>
@@ -87,7 +87,7 @@ export default {
         this.company = this.data['company']
         this.newJobTitle = this.data['job_title_id']
         this.title = this.data['job_title']
-        axios.get('/api/v1/job-title')
+        axios.get('/api/v1/job-titles')
             .then((result) => {
                this.jobTitles = result.data
             })
