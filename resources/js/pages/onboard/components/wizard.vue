@@ -76,7 +76,7 @@ export default {
         axios.post('/api/v1/onboard',data).then((result) =>{
             console.log(result);
             if (result.status == 201) {
-                alert('success');
+                this.user = result.data
                 this.$router.push({ name: 'home', replace: true })
             }
 
@@ -107,7 +107,7 @@ export default {
         data.append('languages', this.data.languages)    
         data.append('religion', this.data.religion)
         data.append('education', this.data.education)
-        data.append('employment', this.data.employment)
+        data.append('job_title', this.data.job_title)
         data.append('purpose', this.data.purpose)
         data.append('bio', this.data.bio)
 

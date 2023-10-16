@@ -11,9 +11,9 @@ import vClickOutside from 'v-click-outside'
 import steps from './pages/onboard/steps.vue'
 import basic from   './pages/onboard/components/Basic.vue'
 import PopupPage from './pages/components/PopupPage.vue'
-import switchInput from './pages/components/Switch.vue'
-import SwitchConstant from './pages/components/SwitchConstant.vue';
-import AppBar from './pages/components/AppBar.vue'
+// import switchInput from './pages/components/Switch.vue'
+// import SwitchConstant from './pages/components/SwitchConstant.vue';
+// import AppBar from './pages/components/AppBar.vue'
 
 import iconLink from './pages/components/IconLink.vue'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
@@ -44,26 +44,29 @@ app.config.globalProperties.consts = {
     // religions: await callApi('religions'),
     // jobTitles: await callApi('job-titles'),
 }
+app.config.globalProperties.user = await callApi('user')
 
 async function callApi(endpoint){
     var data = [];
-    await axios.get('/api/v1/'+endpoint).then((result) =>{
-        console.log(result.data);
-        data = result.data;
+    try {
 
-    });
-    
-    return data;
+        var result = await axios.get('/api/v1/'+endpoint)
+        data = result.data.data ?? result.data
+        return data;
+    } catch (error) {
+        return data;
+    }
+
 }
 
 app.mount('#app')
 app.use(vClickOutside)
 app.component(iconLink,'iconLink')
 app.component("font-awesome-icon", FontAwesomeIcon)
-app.component('PopupPage',PopupPage)
-app.component('switchInput',switchInput)
-app.component('SwitchConstant',SwitchConstant)
-app.component('AppBar',AppBar)
+// app.component('PopupPage',PopupPage)
+// app.component('switchInput',switchInput)
+// app.component('switchConstant',SwitchConstant)
+// app.component('AppBar',AppBar)
 app.component('loading-spin',LoadingSpin)
 
 // app.component(basic,'basic')

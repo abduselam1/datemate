@@ -33,7 +33,16 @@
 
 <script>
 export default {
-    props:{label:String,value:{type:Boolean,default:false}},
+    props:{
+        label:{
+            type: String,
+            default:''
+        },
+        value:{
+            type: Boolean,
+            default:false
+        }
+    },
     created(){
         this.inputValue = this.value
     },

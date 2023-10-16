@@ -1,6 +1,6 @@
 <template>
     <app-bar title="Setting" />
-    <div class=" bg-gray-50 col-span-5 sm:col-span-4 w-full mt-10 sm:mt-0 sm:py-5 h-screen overflow-hidden">
+    <div class=" bg-gray-50 col-span-5 sm:col-span-4 w-full mt-10 sm:mt-0 sm:py-5 h-screen">
         <!-- <div class="sm:hidden z-20 px-3 py-2 bg-gray-50 items-center flex">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
@@ -66,9 +66,21 @@ import LoginActivity from './components/LoginActivity.vue'
 import NotificationSetting from './components/NotificationSetting.vue'
 import Subscription from './components/Subscription.vue'
 import PrivacyAndSecurity from './components/PrivacyAndSecurity.vue'
+import appBar from '../components/AppBar.vue'
 
 export default {
-    components:{iconLink,ChangePassword,profile,LoginActivity,NotificationSetting,Subscription, PrivacyAndSecurity },
+    components:{
+        iconLink,
+        ChangePassword,
+        profile,
+        LoginActivity,
+        NotificationSetting,
+        Subscription,
+        PrivacyAndSecurity,
+        appBar
+    },
+
+    
     data(){
         return {
             active:1
@@ -76,8 +88,8 @@ export default {
     },
     methods:{
         changeTab(tab){
-            console.log(this.$parent);
-            // console.log(tab);
+            // console.log(this.$parent);
+            console.log(this.user);
             this.active = tab
         }
     }

@@ -1,19 +1,19 @@
 <template class="">
     <app-bar title="Profile" />
-    <div v-if="profile == null || profile == undefined"  class=" bg-gray-200   h-screen w-full flex flex-col justify-center">
+    <!-- <div v-if="profile == null || profile == undefined"  class=" bg-gray-200   h-screen w-full flex flex-col justify-center">
         <div class="w-full flex justify-center ">
             <img src="/media/loaders/loader.gif" class="w-10 h-10" alt="">
         </div>
-    </div>
-  <div v-if="profile" v-cloak class=" bg-gray-50 col-span-5 sm:col-span-4 w-full sm:mt-0 mt-7 sm:pt-5 h-screen overflow-hidden flex">
+    </div> -->
+  <div v-if="user" v-cloak class=" bg-gray-50 col-span-5 sm:col-span-4 w-full sm:mt-0 mt-7 sm:pt-5 h-screen overflow-hidden flex">
         <div class="relative pt-5  pb-10 px-3 border-r border-y  border-gray-200 w-full sm:w-3/5  h-full overflow-y-scroll overflow-x-clip ">
 
 
             <!-- Profile photo lists -->
-            <profile-picture :profile-pictures="profile.pictures" />
+            <profile-picture :profile-pictures="user.pictures" />
             <!-- Name and age -->
 
-            <name :profile="profile" />
+            <name :profile="user" />
 
             <div class="border-b pb-7 my-6">
                 <span class="text-lg font-extrabold text-gray-800"> Profile completion</span>
@@ -25,22 +25,22 @@
 
 
 <!--            Language-part-->
-            <language :all-languages="profile.languages" />
+            <language :all-languages="user.languages" />
 
 
 <!--            Purpose part-->
-            <purpose :prps="profile['purpose']" />
+            <purpose :prps="user['purpose']" />
 
             <!-- Interest part -->
 
-            <interest :interests="profile['interests']" />
+            <interest :interests="user['interests']" />
 
 <!--            Educationa and work -->
 
-            <education-and-work :data="profile['education_and_work']" />
+            <education-and-work @aads="updateData" :data="user['education_and_work']" />
 
 <!--            personal Info section-->
-            <info @new-data="updateData" :info="profile" />
+            <info @data-updated="updateData" :info="user" />
 
 <!--            <preference />-->
 
@@ -198,9 +198,10 @@ import Interest from "@/pages/Profile/components/Interest.vue";
 import EducationAndWork from "@/pages/Profile/components/EducationAndWork.vue";
 import Info from "@/pages/Profile/components/Info.vue";
 import Preference from "@/pages/Profile/components/Preference.vue";
+import appBar from '../components/AppBar.vue'
 
 export default {
-    components:{Preference, Info, EducationAndWork, Interest,Purpose, Language, Name, Alert, LoadingSpin, badge,ProfilePicture},
+    components:{Preference, Info, EducationAndWork, Interest,Purpose, Language, Name, Alert, LoadingSpin, badge,ProfilePicture, appBar },
         // mixins: [AlertMixin],
     data(){
         return {
@@ -212,23 +213,9 @@ export default {
         }
     },
     created(){
-        // let year = 1000*60*60*24*365
-        // this.year = Math.round(Date.now() / year)
+        
         const d = new Date();
         this.year = d.getFullYear();
-    },
-
-    mounted() {
-        axios.get('api/get-profile')
-        .then((result) =>{
-            console.log('------');
-            console.log(result.data.data)
-
-            this.profile = result.data.data;
-        })
-        .catch((err) => {
-            console.warn(err);
-        })
     },
 
     methods:{
@@ -241,7 +228,7 @@ export default {
         },
 
         updateData(data){
-            this.profile = data;
+            this.user = data;
         }
 
     }

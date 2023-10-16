@@ -108,46 +108,46 @@
                     <div class="grid mt-5 grid-cols-5 text-gray-600">
                         <div class=" col-span-3">Message</div>
                         <div class="col-span1 flex justify-start">
-                            <switch-input label="message-push" />   
+                            <switch-input :label="'message-push'" />   
                         </div>
                         <div class="col-span1 flex justify-start">
-                            <switch-input label="message-mail" />
+                            <switch-input :label="'message-mail'" />
                         </div>
                     </div>
                     <div class="grid mt-5 grid-cols-5 text-gray-600">
                         <div class=" col-span-3">Matchs</div>
                         <div class="col-span1 flex justify-start">
-                            <switch-input label="match-push" :value="pause ? false : true" />   
+                            <switch-input :label="'match-push'" :value="pause ? false : true" />   
                         </div>
                         <div class="col-span1 flex justify-start">
-                            <switch-input label="match-mail" />
+                            <switch-input :label="'match-mail'" />
                         </div>
                     </div>
                     <div class="grid mt-5 grid-cols-5 text-gray-600">
                         <div class=" col-span-3">Liked</div>
                         <div class="col-span1 flex justify-start">
-                            <switch-input label="liked-push" />   
+                            <switch-input :label="'liked-push'" />   
                         </div>
                         <div class="col-span1 flex justify-start">
-                            <switch-input label="liked-mail" />
+                            <switch-input :label="'liked-mail'" />
                         </div>
                     </div>
                     <div class="grid mt-5 grid-cols-5 text-gray-600">
                         <div class=" col-span-3">Visitors</div>
                         <div class="col-span1 flex justify-start">
-                            <switch-input label="visitors-push" :value="pause ? false : true" />   
+                            <switch-input :label="'visitors-push'" :value="pause ? false : true" />   
                         </div>
                         <div class="col-span1 flex justify-start">
-                            <switch-input label="visitors-mail" :value="pause ? false : true" />
+                            <switch-input :label="'visitors-mail'" :value="pause ? false : true" />
                         </div>
                     </div>
                     <div class="grid mt-5 grid-cols-5 text-gray-600">
                         <div class=" col-span-3">Other</div>
                         <div class="col-span1 flex justify-start">
-                            <switch-input label="other-push" />   
+                            <switch-input :label="'other-push'" />   
                         </div>
                         <div class="col-span1   flex justify-start">
-                            <switch-input label="other-mail" :value="pause ? false : true" />
+                            <switch-input :label="'other-mail'" :value="pause ? false : true" />
                         </div>
                     </div>
 
@@ -165,8 +165,12 @@
 </template>
 
 <script>
-
+import PopupPage from "@/pages/components/PopupPage.vue";
+import switchInput from '@/pages/components/Switch.vue'
+import SwitchConstant from '@/pages/components/SwitchConstant.vue';
 export default {
+    components: { PopupPage,switchInput, SwitchConstant },
+
     data(){
         return{
 

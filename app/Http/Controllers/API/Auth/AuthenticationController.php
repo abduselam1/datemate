@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Services\SessionService;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\ProfileResource;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Password;
@@ -27,7 +28,11 @@ class AuthenticationController extends Controller
 
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password], $request->remember ?? false)) {
             SessionService::createSession($request->ip);
-            return response( User::with('info')->find(auth()->id()));
+            $user = User::find(auth()->id());
+            return response( [
+                'user' => $user->info ? new ProfileResource($user): $user,
+                'info' =>$user->info
+            ]);
         } else {
             return response(['message' => "The credential do not match our records"],422);
         }
@@ -66,7 +71,7 @@ class AuthenticationController extends Controller
 
         SessionService::createSession($request);
 
-        return response($user,201);
+        return response(new ProfileResource($user),201);
 
 
     }

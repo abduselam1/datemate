@@ -9,13 +9,13 @@
             </div>
         </div>
         <div v-show="! showEdit" class="flex w-full mt-3 flex-wrap ">
-            <badge v-for="language in languages" :text="language.name" :type="'brand'"  />
+            <badge v-for="language in languages" :text="language.name" :key="language.id" :type="'brand'"  />
 
         </div>
 
         <div v-show="showEdit" class="mt-5  pb-5 w-full ">
             <div class="w-full flex">
-                <div v-for="language in languages" class="px-2 text-sm py-0.5 ml-1 bg-brand/30 text-brand flex items-center rounded-full">
+                <div v-for="language in languages" :key="language.id" class="px-2 text-sm py-0.5 ml-1 bg-brand/30 text-brand flex items-center rounded-full">
                     <span class="font-semibold">{{ language['native'] ?? language['name'] }}</span>
                     <svg @click="remove(language['id'])" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="cursor-pointer ml-1 w-5 h-5">
                         <path d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z" />
@@ -60,7 +60,6 @@
 import badge from "@/pages/components/Badge.vue";
 import alert from "@/mixins/alert";
 import PopupPage from "@/pages/components/PopupPage.vue";
-import {result} from "lodash/object";
 import Dropdown from "@/pages/components/Dropdown.vue";
 
 export default {
@@ -79,14 +78,9 @@ export default {
     },
     mounted() {
         this.languages = this.allLanguages;
-        axios.get('/api/v1/languages').
-            then((result) => {
-                this.languagesFromBackend = result.data
-            const a = result.data
+        
 
-
-
-            this.unselectedLanguage = a.filter((lan) =>{
+            this.unselectedLanguage = this.consts.data.languages.filter((lan) =>{
                 for (const lan2 of this.languages) {
                     if(lan['id'] == lan2['id']){
                         return false
@@ -96,10 +90,7 @@ export default {
                 return true
             })
 
-        }).
-            catch((err) => {
-            console.log(err)
-        })
+        
     },
     methods:{
         update(){
@@ -143,7 +134,7 @@ export default {
             this.lang = null
         },
         remove(id){
-            for (const lan of this.languagesFromBackend) {
+            for (const lan of this.consts.data.languages) {
                 if (lan['id'] == id){
                     this.unselectedLanguage.push(lan)
                 }

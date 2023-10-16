@@ -94,11 +94,13 @@ export default {
                 
 
                 if(result.status == 200){
+                    console.log(result.data)
                     if(result.data.info == null){
 
                         this.$router.push({name:'onboard',replace:true})
                         return;
                     }
+                    this.user= result.data.user
                     this.$router.push({name:'home', replace: true})
                 }
                 

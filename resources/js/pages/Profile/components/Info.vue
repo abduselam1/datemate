@@ -82,7 +82,7 @@
                     <select id="relationship" v-model="relationship" class=" col-span-3 setting-input">
                         <!--                        <option value="">Select your star sign</option>-->
 
-                        <option v-for="star in consts.relationship" :key="star" :value="star">{{ star }}</option>
+                        <option v-for="rel in consts.relationship" :key="rel" :value="rel">{{ rel }}</option>
 
                         <option selected :value="null">I would rather not to say</option>
 
@@ -94,7 +94,7 @@
                     <select id="sign" v-model="starSign" class=" col-span-3 setting-input">
 <!--                        <option value="">Select your star sign</option>-->
 
-                        <option v-for="star in consts.stars" :value="star">{{ star }}</option>
+                        <option v-for="star in consts.stars" :key="star" :value="star">{{ star }}</option>
 
                         <option selected :value="null">I would rather not to say</option>
 
@@ -113,7 +113,7 @@
                     <select v-model="drinking" class=" col-span-3 setting-input">
                         <!--                        <option value="">Select your star sign</option>-->
 
-                        <option v-for="yesno in consts.yesNo" :value="yesno">{{ yesno }}</option>
+                        <option v-for="yesno in consts.yesNo" :key="yesno" :value="yesno">{{ yesno }}</option>
 
                         <option selected :value="null">I would rather not to say</option>
 
@@ -125,7 +125,7 @@
                     <select id="smoking" v-model="smoking" class=" col-span-3 setting-input">
                         <!--                        <option value="">Select your star sign</option>-->
 
-                        <option v-for="yesno in consts.yesNo" :value="yesno">{{ yesno }}</option>
+                        <option v-for="yesno in consts.yesNo" :key="'sm'+yesno" :value="yesno">{{ yesno }}</option>
 
                         <option selected :value="null">I would rather not to say</option>
 
@@ -137,7 +137,7 @@
                     <select id="religion" v-model="religionId" class=" col-span-3 setting-input">
                         <!--                        <option value="">Select your star sign</option>-->
 
-                        <option v-for="rel in religions" :value="rel['id']">{{ rel['name'] }}</option>
+                        <option v-for="rel in consts.data.religions" :key="rel['id']" :value="rel['id']">{{ rel['name'] }}</option>
 
                         <option selected :value="null">I would rather not to say</option>
 
@@ -175,11 +175,12 @@ export default {
     components: {PopupPage},
 
     props:['info'],
+    emits:['dataUpdated'],
 
     mounted() {
 
         this.starSign = this.info.star
-         this.height = this.info.height
+         this.height = this.info.height ?? 0.0
          this.relationship = this.info.relationship
          this.smoking = this.info.smoking
         this.drinking = this.info.drinking
@@ -188,12 +189,7 @@ export default {
         this.religion = this.info.religion['name']
         this.religionId = this.info.religion.id
 
-        axios.get('/api/v1/religion')
-            .then((result) => {
-                this.religions = result.data
-
-            })
-            .catch((err) => {})
+        
     },
 
     data(){
@@ -208,7 +204,6 @@ export default {
             education:'',
             religion:'',
             religionId:'',
-            religions:[],
             isLoading:false,
             error:''
 
@@ -231,7 +226,7 @@ export default {
 
             axios.put('/api/v1/user/info',data)
                 .then((result) => {
-                    this.$emit('newData',result.data.data)
+                    this.$emit('dataUpdated',result.data.data)
                     this.isLoading = false
                     this.showEdit = false
                 })

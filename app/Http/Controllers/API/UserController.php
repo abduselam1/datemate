@@ -26,16 +26,19 @@ class UserController extends Controller
 
     public function user()
     {
-        // return 'asdf';
+        
         $user = User::find(auth()->id());
-        return new UserResource($user);
+
+        return new ProfileResource($user);
     }
 
     public function getProfile()
     {
         $user = User::find(auth()->id());
-
+        
         return new ProfileResource($user);
+        
+
     }
 
     public function editLanguage(Request $request)

@@ -132,7 +132,7 @@ export default {
                     languages:this.languages, 
                     religion:this.religion, 
                     education:this.education, 
-                    employment:this.employment, 
+                    job_title:this.employment, 
                     purpose:this.purpose
                 }
                 this.$emit('nextPage',data)

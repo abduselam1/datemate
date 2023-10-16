@@ -11,6 +11,7 @@ use App\Models\User\Language;
 use App\Models\User\Religion;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\OnboardRequest;
+use App\Http\Resources\ProfileResource;
 use PragmaRX\Countries\Package\Countries;
 use Intervention\Image\ImageManagerStatic as Image;
 
@@ -51,7 +52,7 @@ class OnboardController extends Controller
             'bio' => $request->bio,
             'dob' => Carbon::parse($request->dob),
             'religion_id' => $request->religion,
-            'job_title_id' => $request->jobTitle,
+            'job_title_id' => $request->job_title,
             'phone_number' => $request->phone_number,
             'education_level' => $request->education,
             'purpose' => $request->purpose,
@@ -59,7 +60,7 @@ class OnboardController extends Controller
 
         $user->languages()->sync(explode(',', $request->languages));
 
-        $photo = $request->image->store("product/" . auth()->user()->name, 'public');
+        $photo = $request->image->store("", 'public');
 
         $image = Image::make(public_path('storage/' . $photo));
 
@@ -82,7 +83,7 @@ class OnboardController extends Controller
             'is_primary' => true,
         ]);
 
-        return response($user,201);
+        return response(new ProfileResource($user),201);
 
     }
 

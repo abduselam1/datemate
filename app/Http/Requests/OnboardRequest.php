@@ -31,7 +31,7 @@ class OnboardRequest extends FormRequest
             'languages' => ['required'],
             'religion' => ['required'],
             'education' => ['required'],
-            'employment' => ['required'],
+            'education' => ['required'],
             'purpose' => ['required'],
             'bio' => ['required'],
         ];

@@ -2,14 +2,16 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\EditPictureRequest;
-use App\Http\Requests\PictureRequest;
-use App\Models\User\Picture;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
+use App\Models\User;
 use Illuminate\Support\Str;
+use App\Models\User\Picture;
+use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\PictureRequest;
 use Intervention\Image\Facades\Image;
+use App\Http\Requests\EditPictureRequest;
 
 class PictureController extends Controller
 {
@@ -21,26 +23,46 @@ class PictureController extends Controller
     function store(PictureRequest $request)
     {
 //        dd($request->picture);
-        $img_name = $request->picture->store('','public');
-        $image = Image::make(public_path('storage/'.$img_name));
+        // $img_name = $request->picture->store('','public');
+        // $image = Image::make(public_path('storage/'.$img_name));
 
-        $thumbnailName = 'storage/thumbnail/' . Str::random(50).'.'.$image->extension;
+        // $thumbnailName = 'storage/thumbnail/' . Str::random(50).'.'.$image->extension;
 
-        $image->save($thumbnailName,50);
+        // $image->save($thumbnailName,50);
 
-        $newPicture = Picture::create([
-            'url' => $img_name,
-            'user_id' => auth()->id(),
-            'thumbnail_url' => $thumbnailName,
-            'ext' => $image->extension,
-            'size' => $image->filesize(),
-        ]);
 
-        auth()->user()->pictures()->where('id','!=',$newPicture->id)->update(['is_primary' =>false]);
+        $photo = $request->picture->store("", 'public');
 
-        $newPicture->update(['is_primary' => true]);
+        $image = Image::make(public_path('storage/' . $photo));
 
-        return response(auth()->user()->pictures()->orderBy('updated_at','desc')->get(),201);
+        $ext = $image->extension;
+        $size = $image->filesize();
+
+        $image->resize(150, null, function ($constraint) {
+            $constraint->aspectRatio();
+        });
+
+        $path = substr($photo, 0, strrpos($photo, '.')) . '_thumbnail' . substr($photo, strrpos($photo, '.'));
+        $thumbnail = $path;
+        $image->save(public_path('storage/' . $path));
+        
+        $user = User::find(auth()->id());
+        
+        DB::transaction(function () use ($user,$photo,$ext,$size,$thumbnail) {
+            
+            $newPicture = Picture::create([
+                'url' => $photo,
+                'user_id' => $user->id,
+                'thumbnail_url' => $thumbnail,
+                'ext' => $ext,
+                'size' => $size,
+            ]);
+
+            $user->pictures()->where('user_id',$user->id)->where('is_primary',true)->update(['is_primary' =>false]);
+            $newPicture->update(['is_primary' => true]);
+        });
+
+        return response($user->pictures()->orderBy('is_primary','desc')->orderBy('updated_at','desc')->get(),201);
 
     }
 
@@ -50,18 +72,19 @@ class PictureController extends Controller
             return response(['message' => "You cannot delete all of your profile pictures"],400);
         }
         if($picture->is_primary){
-            auth()->user()->pictures()->where('id','!=',$picture->id)->orderBy('id','desc')->first()->update(['is_primary' => true]);
+            
+            User::find(auth()->id())->pictures()->where('id','!=',$picture->id)->orderBy('id','desc')->first()->update(['is_primary' => true]);
         }
 
         $picture->delete();
-        return response(Picture::where('user_id',auth()->id())->orderBy('updated_at','desc')->get(),200);
+        return response(Picture::where('user_id',auth()->id())->orderBy('is_primary')->orderBy('updated_at','desc')->get(),200);
 
     }
 
     public function edit(EditPictureRequest $request ,Picture $picture)
     {
 
-        auth()->user()->pictures()->where('id','!=',$picture->id)->update(['is_primary' =>false]);
+        User::find(auth()->id())->pictures()->where('id','!=',$picture->id)->update(['is_primary' =>false]);
 
         $picture->update($request->all());
 

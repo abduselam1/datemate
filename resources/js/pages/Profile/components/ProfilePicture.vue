@@ -32,7 +32,7 @@
         <div  v-for="picture in pictures" :key="picture['id']"
               class="relative flex flex-col justify-center group ml-2">
             <div class="sm:w-40 sm:h-40 w-32 h-32" >
-                <img :src="'/'+picture['thumbnail_url']" :class="{ 'border-2 border-brand2 rounded-xl':
+                <img :src="'/storage/'+picture['thumbnail_url']" :class="{ 'border-2 border-brand2 rounded-xl':
                         picture['is_primary'] }"
                      class="h-full w-full rounded-xl object-cover" alt="">
             </div>
@@ -68,10 +68,11 @@ import LoadingSpin from "@/Components/LoadingSpin.vue";
 import axios from "axios";
 import Alert from "@/Components/alerts/Alert.vue";
 import alert from "@/mixins/alert";
+import PopupPage from "@/pages/components/PopupPage.vue";
 
 export default {
     name: "ProfilePicture",
-    components: {Alert, LoadingSpin},
+    components: {Alert, LoadingSpin,PopupPage},
     props: ['profilePictures'],
     mixins:[alert],
     data(){
