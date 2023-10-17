@@ -15,6 +15,7 @@ use App\Http\Resources\UserResource;
 use App\Http\Requests\UserInfoRequest;
 use App\Http\Resources\ProfileResource;
 use PragmaRX\Countries\Package\Countries;
+use Illuminate\Validation\ValidationException;
 use App\Http\Resources\EducationAndWorkResource;
 
 class UserController extends Controller
@@ -147,5 +148,35 @@ class UserController extends Controller
             'countries' => $name
         ]);
         
+    }
+
+    public function editProfile(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'last_name' => 'required',
+            'email' => 'required|email',
+            'interested_sex' => 'required'
+        ]);
+        $isEmailTaken = User::whereNot('id', auth()->id())->where('email', 'hua@gmail.com')->first();
+        if($isEmailTaken){
+            throw ValidationException::withMessages([
+                'email' => ['This email is already taken.'],
+            ]);
+        }
+        $user = User::find(auth()->id());
+
+        $user->update([
+            'name' => $request->name,
+            'last_name' => $request->last_name,
+            'email' => $request->email
+        ]);
+
+        $user->info->update([
+            'interested_sex' => $request->interested_sex
+        ]);
+
+        return new ProfileResource($user);
+
     }
 }

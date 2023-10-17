@@ -54,6 +54,8 @@ Route::group(['prefix' => 'v1'],function(){
         Route::put('user/interest',[UserController::class,'editInterest']);
     
         Route::put('user/education-and-work',[UserController::class,'editEducationAndWork']);
+
+        Route::put('edit-profile',[UserController::class,'editProfile']);
     
         Route::put('user/info',[UserController::class,'editUser']);
     

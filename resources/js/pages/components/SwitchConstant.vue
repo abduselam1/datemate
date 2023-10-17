@@ -19,7 +19,10 @@
 
 <script>
 export default {
-    props:{label:String,value:Boolean},
+    props:{
+      label:String,
+      value:Boolean,
+    },
     
     methods:{
     }
