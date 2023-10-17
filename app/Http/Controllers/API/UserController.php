@@ -17,6 +17,7 @@ use App\Http\Resources\ProfileResource;
 use PragmaRX\Countries\Package\Countries;
 use Illuminate\Validation\ValidationException;
 use App\Http\Resources\EducationAndWorkResource;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -178,5 +179,25 @@ class UserController extends Controller
 
         return new ProfileResource($user);
 
+    }
+
+    public function passwordChange(Request $request)
+    {
+        $request->validate([
+            'current_password' => 'required',
+            'password' => 'required|confirmed'
+        ]);
+
+        $user = User::find(auth()->id());
+
+        if(Hash::check($request->current_password, $user->password)){
+            $user->update([
+                'password' => Hash::make($request->password)
+            ]);
+            return response([],200);
+        }
+        throw ValidationException::withMessages([
+            'password' => ['Your password is wrong please try again.'],
+        ]);
     }
 }

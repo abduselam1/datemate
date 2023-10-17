@@ -27,6 +27,7 @@
                 </select>
                 <span v-for="error in v$.interested_sex.$errors" :key="error.$uid" class="text-sm text-red-400 font-semibold">{{ error.$message }}</span>
         </div>
+        <span class="text-sm mt-2 text-red-400 font-semibold">{{ serverError }}</span>
 
         <div class="flex justify-end pr-5 mt-5 mb-5">
             
@@ -118,10 +119,7 @@ export default {
                     this.serverError = "Something went wrong please try again."
                 }
                 this.isLoading = false
-            });
-            console.log("not the same");
-            
-            // console.log('Updated');
+            });            
         }
     },
     validations(){
