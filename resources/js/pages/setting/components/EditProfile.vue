@@ -40,7 +40,9 @@
         </div>
         
         
-        
+        <div class="fixed w-full h-full" v-show="showalert">
+            <alert-component :type="alertType" :message="alertMessage"/>
+        </div>
         
     </form>
 </template>
@@ -48,8 +50,12 @@
 <script>
 import {useVuelidate} from '@vuelidate/core'
 import { helpers,required,email } from '@vuelidate/validators'
+import alert from "@/mixins/alert";
+import alertComponent from "@/Components/alerts/Alert.vue";
 
 export default {
+    mixins: [alert],
+    components:{alertComponent},
     data(){
         return {
             v$: useVuelidate(),
@@ -98,7 +104,7 @@ export default {
             }
             axios.put('/api/v1/edit-profile',data).then((result) => {
                 if(result.status == 200){
-                    
+                    this.showAlert("Profile updated successfully", 'success')
                     this.user = result.data.data
                     console.log(this.user);
                 }

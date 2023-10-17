@@ -1,5 +1,5 @@
 <template>
-    <div  ref="snackbar" class="fixed w-full bottom-3 z-40  px-3">
+    <div class="fixed w-full bottom-3 left-0 z-40  px-3">
         <div class="bg-gray-600 w-full text-center rounded-full py-2">
             <span class="text-white ">{{message}}</span>
         </div>

@@ -50,7 +50,7 @@ class OnboardController extends Controller
             'sex' => $request->sex,
             'interested_sex' => $request->interested_sex,
             'bio' => $request->bio,
-            'dob' => Carbon::parse($request->dob),
+            'dob' => Carbon::parse($request->date_of_birth),
             'religion_id' => $request->religion,
             'job_title_id' => $request->job_title,
             'phone_number' => $request->phone_number,
