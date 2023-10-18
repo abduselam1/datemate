@@ -64,8 +64,7 @@
 
 import { useVuelidate } from '@vuelidate/core'
 import { required, email,helpers } from '@vuelidate/validators'
-
-
+// import { changeUserValue } from '@/app'
 export default {
 
     data(){
@@ -100,6 +99,7 @@ export default {
                         this.$router.push({name:'onboard',replace:true})
                         return;
                     }
+                    this.changeUserValue(result.data.user)
                     this.user= result.data.user
                     this.$router.push({name:'home', replace: true})
                 }

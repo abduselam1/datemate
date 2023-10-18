@@ -187,7 +187,6 @@
 
 <script>
 import badge from '../components/Badge.vue'
-import axios from "axios";
 import LoadingSpin from "@/Components/LoadingSpin.vue";
 import Alert from "@/Components/alerts/Alert.vue";
 import ProfilePicture from "@/pages/Profile/components/ProfilePicture.vue";
@@ -199,6 +198,7 @@ import EducationAndWork from "@/pages/Profile/components/EducationAndWork.vue";
 import Info from "@/pages/Profile/components/Info.vue";
 import Preference from "@/pages/Profile/components/Preference.vue";
 import appBar from '../components/AppBar.vue'
+// import { changeUserValue } from '@/app'
 
 export default {
     components:{Preference, Info, EducationAndWork, Interest,Purpose, Language, Name, Alert, LoadingSpin, badge,ProfilePicture, appBar },
@@ -228,6 +228,7 @@ export default {
         },
 
         updateData(data){
+            this.changeUserValue(data)
             this.user = data;
         }
 

@@ -8,17 +8,11 @@ import indexWithDark from './pages/dashboard/IndexWithDark.vue'
 import router from './routes'
 import vClickOutside from 'v-click-outside'
 
-import steps from './pages/onboard/steps.vue'
-import basic from   './pages/onboard/components/Basic.vue'
-import PopupPage from './pages/components/PopupPage.vue'
-// import switchInput from './pages/components/Switch.vue'
-// import SwitchConstant from './pages/components/SwitchConstant.vue';
-// import AppBar from './pages/components/AppBar.vue'
 
 import iconLink from './pages/components/IconLink.vue'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { faPhone } from "@fortawesome/free-solid-svg-icons";
+// import { faPhone } from "@fortawesome/free-solid-svg-icons";
 
 import { faUserSecret } from '@fortawesome/free-solid-svg-icons'
 import LoadingSpin from "@/Components/LoadingSpin.vue";
@@ -45,6 +39,9 @@ app.config.globalProperties.consts = {
     // jobTitles: await callApi('job-titles'),
 }
 app.config.globalProperties.user = await callApi('user')
+app.config.globalProperties.changeUserValue = (newValue) => {
+  app.config.globalProperties.user = newValue;
+};
 
 async function callApi(endpoint){
     var data = [];
@@ -75,3 +72,4 @@ app.component('loading-spin',LoadingSpin)
 //     routes: routes,
 //     mode: 'history'
 //   })
+// export {changeUserValue}

@@ -1,5 +1,5 @@
 <template>
-    <div class="py-5 w-full transform ease-in-out duration-1000 border-b flex flex-col cursor-pointer " @click="isOpen = !isOpen">
+    <div class="py-5 w-full transform ease-in-out duration-1000 border-b flex flex-col cursor-pointer ">
         <div class="w-full flex items-center justify-between">
 
             <div class="flex items-center ">
@@ -15,19 +15,9 @@
                 </div>
             </div>
             
-            <div  class=" cursor-pointer text-slate-700 transform ease-out duration-500">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" :class="{'hidden':isOpen}" class="w-6 h-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-                </svg>
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" :class="{'hidden':!isOpen}" class="w-6 h-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5" />
-                </svg>
-
-            </div>
+            
         </div>
-        <div class="mt-5 w-full flex justify-center transform ease-in-out duration-700" :class="{'hidden':!isOpen}">
-            <button @click="console.log('asd')" class="py-3 cursor-pointer px-20 bg-red-500 text-slate-200 text-lg rounded-full text-center">Terminate</button>
-        </div>
+        
     </div>
 </template>
 
@@ -35,7 +25,7 @@
 export default {
     data(){
         return {
-            isOpen:false
+            
         }
     }
 

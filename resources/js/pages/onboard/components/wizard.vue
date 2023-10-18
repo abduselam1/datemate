@@ -77,6 +77,7 @@ export default {
             console.log(result);
             if (result.status == 201) {
                 this.user = result.data
+                this.changeUserValue(result.data)
                 this.$router.push({ name: 'home', replace: true })
             }
 

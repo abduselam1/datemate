@@ -51,7 +51,8 @@ export default {
             currentPassword:'',
             password:'',
             confirmPassword:'',
-            isLoading:false
+            isLoading:false,
+            serverError:''
         }
     },
     methods:{

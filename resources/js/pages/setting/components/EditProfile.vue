@@ -53,7 +53,7 @@ import {useVuelidate} from '@vuelidate/core'
 import { helpers,required,email } from '@vuelidate/validators'
 import alert from "@/mixins/alert";
 import alertComponent from "@/Components/alerts/Alert.vue";
-
+// import { changeUserValue } from '@/app'
 export default {
     mixins: [alert],
     components:{alertComponent},
@@ -107,6 +107,7 @@ export default {
                 if(result.status == 200){
                     this.showAlert("Profile updated successfully", 'success')
                     this.user = result.data.data
+                    this.changeUserValue(result.data.data)
                     console.log(this.user);
                 }
                 this.isLoading = false

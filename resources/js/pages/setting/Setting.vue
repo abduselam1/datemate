@@ -7,7 +7,7 @@
             </svg>
             <span class="ml-3 text-lg text-slate-700">Setting</span>
         </div> -->
-        <div class="  rounded-xl pb-5 relative sm:mt-16  h-full  sm:max-w-xl  md:max-w-2xl xl:max-w-3xl mx-auto ">
+        <div class="  rounded-xl pb-5 relative sm:mt-16  h-full  sm:max-w-xl  md:max-w-2xl xl:max-w-3xl mx-auto overflow-hidden ">
             <div class=" absolutes sticky top-0 pt-5 bg-gray-100 left-0 w-full rounded-t-xl  border-y truncate border-gray-300 ">
                 <ul class=" flex -mb-px text-gray-400 overflow-scroll font-semibold">
                     <li @click="changeTab(1)" :class="{'border-b-3 text-gray-600 border-brand':active == 1}" class="transform ease-out mx-3 text-sm cursor-pointer fonts-semibold pb-3">Edit profile</li>
