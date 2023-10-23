@@ -62,7 +62,10 @@ Route::group(['prefix' => 'v1'],function(){
         Route::put('user/info',[UserController::class,'editUser']);
     
         Route::get('interests',[UserController::class,'interestIndex']);
-    
+
+        Route::get('sessions',[AuthenticationController::class,'sessions']);
+
+        Route::post('sessions',[AuthenticationController::class,'sessionDestroy'])->middleware('auth.session');
         
     
     

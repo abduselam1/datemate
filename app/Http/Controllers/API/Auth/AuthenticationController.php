@@ -8,6 +8,7 @@ use App\Services\SessionService;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ProfileResource;
+use App\Models\Security\Session;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Password;
@@ -86,5 +87,31 @@ class AuthenticationController extends Controller
         } catch (\Throwable $th) {
             return new JsonResponse(false,500);
         }
+    }
+
+    public function sessions()
+    {
+        $session = Auth::getSession();
+        
+        $sessions = Session::where('user_id',auth()->id())->orderBy('id','desc')->get();
+        $id = session()->getId();
+
+        return response([
+            'sessions' => $sessions,
+            'id' => $session->getId()
+        ]);
+    }
+    public function sessionDestroy(Request $request)
+    {
+
+        $id = Auth::getSession()->getId();
+        Auth::logoutOtherDevices($request->password);
+        Session::where('user_id', auth()->id())->whereNot('payload', $id)->delete();
+        return response(
+            [
+                'sessions' =>Session::where('user_id',auth()->id())->orderBy('id','desc')->get(),
+                'id' => $id
+            ]
+        );
     }
 }

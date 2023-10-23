@@ -4,6 +4,7 @@ namespace App\Services;
 
 use Agent;
 use App\Models\Security\Session;
+use Illuminate\Support\Facades\Auth;
 use Stevebauman\Location\Facades\Location;
 
 
@@ -24,7 +25,7 @@ class SessionService
                 'country' => $position ? $position->countryName : null,
                 'city' => $position ? $position->cityName : null,
                 'browser' => $browser.' '.$browserVersion,
-                'payload' => session()->getId(),
+                'payload' => Auth::getSession()->getId(),
                 'last_activity' => now(),
             ]);
             return $session;

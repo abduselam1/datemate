@@ -23,9 +23,20 @@ class Session extends Model
 
     public $timestamps = false;
 
+    protected $casts = [
+        'last_activity'=> 'date'
+    ];
 
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    protected $appends = ['formatedTime'];
+
+    public function getFormatedTimeAttribute()
+    {
+
+        return $this->last_activity->diffForHumans();
     }
 }

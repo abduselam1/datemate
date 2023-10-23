@@ -7,7 +7,7 @@ export default {
         }
     },
     methods:{
-        showAlert(message,type='default'){
+        showAlert(message,type='default',second=5){
             this.alertMessage = message
             this.alertType = type
             this.showalert = true
@@ -15,7 +15,7 @@ export default {
                 this.alertMessage = ""
                 this.alertType = ''
                 this.showalert = false
-            },5000)
+            },second*1000)
         }
     }
 }

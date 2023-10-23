@@ -10,8 +10,15 @@
                 </div>
 
                 <div class="ml-5 flex flex-col">
-                    <span>Addis Ababa, Ethiopia</span>
-                    <span class="text-sm font-medium text-green-600">Active now.<span class="text-slate-600 pl-2">Samsung M13</span></span>
+                    <span v-if="session.city == null && session.country == null">
+                        Unknown Location
+                    </span>
+                    <span v-else>{{session.city+ ', '}} {{session.country}}</span>
+                    <span class="text-sm font-medium text-green-600">
+                        <span v-if="current">Active now.</span>
+                        <span v-else class="text-slate-600 font-semibold"> {{ session.formatedTime }}</span>
+                        <span class="text-slate-600 pl-2">{{session.browser}}</span>
+                    </span>
                 </div>
             </div>
             
@@ -27,6 +34,10 @@ export default {
         return {
             
         }
+    },
+    props:{
+        session:Object,
+        current:Boolean
     }
 
 }

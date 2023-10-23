@@ -30,7 +30,7 @@ use PragmaRX\Countries\Package\Countries;
 
 // Route::view('/register','app')->name('register');
 
-// Route::view('/forgot-password','app')->name('forgot');
+// Route::view('/forgot-pas sword','app')->name('forgot');
 
 // Route::view('/onboard','app');
 
@@ -42,11 +42,11 @@ Route::group(['middleware' => 'guest'],function(){
 
     Route::get('login', function(){
         return view('app');
-    })->name('login')->middleware('guest');
+    })->name('login');
     
     Route::get('register', function(){
         return view('app');
-    })->name('register')->middleware('guest');
+    })->name('register');
 
     Route::get('reset-password/{token}', function(){
         return view('app');
