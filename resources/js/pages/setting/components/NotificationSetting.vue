@@ -15,7 +15,7 @@
 
         <div class="mt-5 flex justify-between">
             <label for="pause">Pause all</label>
-            <switch-input :label="'pause'"  @update:pause="this.pause = !this.pause" />
+            <switch-input :label="'pause'"  v-model="notificationPaused" />
 
         </div>
 
@@ -31,42 +31,42 @@
             </div>
 
             <div class="mt-5">
-                <div class="grid mt-5 grid-cols-5 text-gray-600">
-                        <div class=" col-span-3">Message</div>
-                        <div class="col-span1 flex justify-start">
-                            <switch-constant />   
-                        </div>
-                        <div class="col-span1 flex justify-start">
-                            <switch-constant />
-                        </div>
+                <div v-for="(nfc, name) in setting.notifications" :key="name" class="grid mt-5 grid-cols-5 text-gray-600">
+                    <div class=" col-span-3">{{ name }}</div>
+                    <div class="col-span1 flex justify-start">
+                        <switch-constant :value="notificationPaused ? false : nfc.push" />   
                     </div>
-                <div class="grid mt-5 grid-cols-5 text-gray-600">
-                        <div class=" col-span-3">Matchs</div>
-                        <div class="col-span1 flex justify-start">
-                            <switch-constant :value="pause ? false : true" />   
-                        </div>
-                        <div class="col-span1 flex justify-start">
-                            <switch-constant />
-                        </div>
+                    <div class="col-span1 flex justify-start">
+                        <switch-constant :value="notificationPaused ? false : nfc.email" />
                     </div>
-                <div class="grid mt-5 grid-cols-5 text-gray-600">
-                        <div class=" col-span-3">Liked</div>
-                        <div class="col-span1 flex justify-start">
-                            <switch-constant />   
-                        </div>
-                        <div class="col-span1 flex justify-start">
-                            <switch-constant />
-                        </div>
+                </div>
+                <!-- <div class="grid mt-5 grid-cols-5 text-gray-600">
+                    <div class=" col-span-3">Matchs</div>
+                    <div class="col-span1 flex justify-start">
+                        <switch-constant :value="pause ? false : true" />   
                     </div>
-                <div class="grid mt-5 grid-cols-5 text-gray-600">
-                        <div class=" col-span-3">Visitors</div>
-                        <div class="col-span1 flex justify-start">
-                            <switch-constant :value="pause ? false : true" />   
-                        </div>
-                        <div class="col-span1 flex justify-start">
-                            <switch-constant :value="pause ? false : true" />
-                        </div>
+                    <div class="col-span1 flex justify-start">
+                        <switch-constant />
                     </div>
+                </div>
+                <div class="grid mt-5 grid-cols-5 text-gray-600">
+                    <div class=" col-span-3">Liked</div>
+                    <div class="col-span1 flex justify-start">
+                        <switch-constant />   
+                    </div>
+                    <div class="col-span1 flex justify-start">
+                        <switch-constant />
+                    </div>
+                </div>
+                <div class="grid mt-5 grid-cols-5 text-gray-600">
+                    <div class=" col-span-3">Visitors</div>
+                    <div class="col-span1 flex justify-start">
+                        <switch-constant :value="pause ? false : true" />   
+                    </div>
+                    <div class="col-span1 flex justify-start">
+                        <switch-constant :value="pause ? false : true" />
+                    </div>
+                </div>
                 <div class="grid mt-5 grid-cols-5 text-gray-600">
                     <div class=" col-span-3">Other</div>
                     <div class="col-span1 flex justify-start">
@@ -75,10 +75,10 @@
                     <div class="col-span1 flex justify-start">
                         <switch-constant :value="pause ? false : true" />
                     </div>
-                </div>
+                </div> -->
 
                 <div class="mt-5 flex justify-end ">
-                    <button @click="showEditModal = true" class="outline-none px-5 py-1 text-white bg-gradient-to-r from-brand to-brand2 rounded-full">Edit</button>
+                    <button @click="showEdit" class="outline-none px-5 py-1 text-white bg-gradient-to-r from-brand to-brand2 rounded-full">Edit</button>
                 </div>
                 
                 
@@ -105,54 +105,20 @@
                             Email
                         </div>
                     </div>
-                    <div class="grid mt-5 grid-cols-5 text-gray-600">
-                        <div class=" col-span-3">Message</div>
+                    <div v-for="(ntf, name) in setting.notifications" :key="'edit-'+name" class="grid mt-5 grid-cols-5 text-gray-600">
+                        <div class=" col-span-3">{{ name }}</div>
                         <div class="col-span1 flex justify-start">
-                            <switch-input :label="'message-push'" />   
+                            <switch-input :key="'new-push-' + name"  :label="'push-'+name" v-model="newPushValues[name]" />   
                         </div>
                         <div class="col-span1 flex justify-start">
-                            <switch-input :label="'message-mail'" />
+                            <switch-input :key="'new-email-'+name" :label="'email-'+name" v-model="newEmailValues[name]" />
                         </div>
                     </div>
-                    <div class="grid mt-5 grid-cols-5 text-gray-600">
-                        <div class=" col-span-3">Matchs</div>
-                        <div class="col-span1 flex justify-start">
-                            <switch-input :label="'match-push'" :value="pause ? false : true" />   
-                        </div>
-                        <div class="col-span1 flex justify-start">
-                            <switch-input :label="'match-mail'" />
-                        </div>
-                    </div>
-                    <div class="grid mt-5 grid-cols-5 text-gray-600">
-                        <div class=" col-span-3">Liked</div>
-                        <div class="col-span1 flex justify-start">
-                            <switch-input :label="'liked-push'" />   
-                        </div>
-                        <div class="col-span1 flex justify-start">
-                            <switch-input :label="'liked-mail'" />
-                        </div>
-                    </div>
-                    <div class="grid mt-5 grid-cols-5 text-gray-600">
-                        <div class=" col-span-3">Visitors</div>
-                        <div class="col-span1 flex justify-start">
-                            <switch-input :label="'visitors-push'" :value="pause ? false : true" />   
-                        </div>
-                        <div class="col-span1 flex justify-start">
-                            <switch-input :label="'visitors-mail'" :value="pause ? false : true" />
-                        </div>
-                    </div>
-                    <div class="grid mt-5 grid-cols-5 text-gray-600">
-                        <div class=" col-span-3">Other</div>
-                        <div class="col-span1 flex justify-start">
-                            <switch-input :label="'other-push'" />   
-                        </div>
-                        <div class="col-span1   flex justify-start">
-                            <switch-input :label="'other-mail'" :value="pause ? false : true" />
-                        </div>
-                    </div>
+                    
+                    
 
-                    <div class="mt-5 flex justify-end ">
-                        <button @click="showEditModal = true" class="outline-none px-5 py-1 text-white bg-gradient-to-r from-brand to-brand2 rounded-full">Update</button>
+                    <div class="mt-7 flex justify-end ">
+                        <button @click="updateNotification" class="outline-none px-5 py-1 text-white bg-gradient-to-r from-brand to-brand2 rounded-full">Update</button>
                     </div>
                 
                 
@@ -162,14 +128,45 @@
         </popup-page>
 
     </div>
+    <div class="fixed w-full h-full" v-show="showalert">
+        <alert-component :type="alertType" :message="alertMessage"/>
+    </div>
 </template>
 
 <script>
 import PopupPage from "@/pages/components/PopupPage.vue";
 import switchInput from '@/pages/components/Switch.vue'
 import SwitchConstant from '@/pages/components/SwitchConstant.vue';
+import alert from "@/mixins/alert";
+import alertComponent from "@/Components/alerts/Alert.vue";
 export default {
-    components: { PopupPage,switchInput, SwitchConstant },
+    components: { PopupPage,switchInput, SwitchConstant, alertComponent },
+
+    props:{ 
+        setting:{
+            Object
+        }
+    },
+    mixins:[alert],
+    created(){
+        this.notifications = this.setting.notifications
+        console.log('----');
+        console.log(this.setting);
+        this.notificationPaused = this.setting.notification_paused
+    },
+
+    // mounted(){
+        // this.newEmailValues = {
+        //     message: false,
+        //     matchs: true,
+        //     liked: false,
+        //     visitors: false,
+        //     other: true
+        // }
+        
+
+
+    // },
 
     data(){
         return{
@@ -178,6 +175,22 @@ export default {
             nuVal:false,
             neVal:false,
             showEditModal: false,
+            notifications:[],
+            newPushValues:{
+                message:false,
+                matchs:true,
+                liked:false,
+                visitors:false,
+                other:true
+            },
+            newEmailValues: {
+                message: false,
+                matchs: true,
+                liked: false,
+                visitors: false,
+                other: true
+             },
+            notificationPaused: false
         }
     },
     methods:{
@@ -197,9 +210,26 @@ export default {
         onInputValueChange(newValue) {
             this.switchValue = newValue;
             console.log('fasd');
+        },
+        showEdit(){
+            if(this.notificationPaused){
+                this.showAlert("Please turn on your notification setting first.")
+            }else{
+                this.showEditModal = true
+            }
+            
+            console.log(this.notifications);
+        },
+        updateNotification(){
+            console.log(this.newPushValues,this.newEmailValues);
         }
 
     },
+    computed:{
+        // capitalizeFirstLetter(value){
+        //     return value[0].toUpperCase() + value.slice(1)
+        // }
+    }
 
     
 }

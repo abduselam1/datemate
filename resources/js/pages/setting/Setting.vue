@@ -9,12 +9,12 @@
         </div> -->
         <div class="  rounded-xl pb-5 relative sm:mt-16  h-full  sm:max-w-xl  md:max-w-2xl xl:max-w-3xl mx-auto overflow-hidden ">
             <div class=" absolutes sticky top-0 pt-5 bg-gray-100 left-0 w-full rounded-t-xl  border-y truncate border-gray-300 ">
-                <ul class=" flex -mb-px text-gray-400 overflow-scroll font-semibold">
+                <ul class=" flex justify-evenly -mb-px text-gray-400 overflow-scroll font-semibold">
                     <li @click="changeTab(1)" :class="{'border-b-3 text-gray-600 border-brand':active == 1}" class="transform ease-out mx-3 text-sm cursor-pointer fonts-semibold pb-3">Edit profile</li>
                     <li @click="changeTab(2)" :class="{'border-b-3 text-gray-600 border-brand':active == 2}" class="transform ease-out mx-3 text-sm cursor-pointer fonts-semibold pb-3">Change password</li>
                     <li @click="changeTab(3)" :class="{'border-b-3 text-gray-600 border-brand':active == 3}" class="transform ease-out mx-3 text-sm cursor-pointer fonts-semibold pb-3 ">Subscription</li>
-                    <li @click="changeTab(4)" :class="{'border-b-3 text-gray-600 border-brand':active == 4}" class="transform ease-out mx-3 text-sm cursor-pointer fonts-semibold pb-3">Notifications</li>
-                    <li @click="changeTab(5)" :class="{'border-b-3 text-gray-600 border-brand':active == 5}" class="transform ease-out mx-3 text-sm cursor-pointer fonts-semibold pb-3">Privacy and Security</li>
+                    <!-- <li @click="changeTab(4)" :class="{'border-b-3 text-gray-600 border-brand':active == 4}" class="transform ease-out mx-3 text-sm cursor-pointer fonts-semibold pb-3">Notifications</li> -->
+                    <!-- <li @click="changeTab(5)" :class="{'border-b-3 text-gray-600 border-brand':active == 5}" class="transform ease-out mx-3 text-sm cursor-pointer fonts-semibold pb-3">Privacy and Security</li> -->
                     <li @click="changeTab(6)" :class="{ 'border-b-3 text-gray-600 border-brand': active == 6 }" class="transform ease-out mx-3 text-sm cursor-pointer fonts-semibold pb-3">Login activity</li>
                     <!-- <li @click="changeTab(7)" :class="{ 'border-b-3 text-gray-600 border-brand': active == 7 }" class="transform ease-out mx-3 text-sm cursor-pointer fonts-semibold pb-3">Others</li> -->
                     
@@ -32,12 +32,12 @@
                 <div v-show="active == 3">
                     <subscription />
                 </div>
-                <div v-show="active == 4">
-                    <notification-setting />
-                </div>
+                <!-- <div v-show="active == 4">
+                    <notification-setting :setting="setting" />
+                </div> -->
 
                 <div v-show="active ==5">
-                    <privacy-and-security />
+                    <privacy-and-security :setting="setting" />
                 </div>
 
                 <div v-show="active == 6">
@@ -80,10 +80,21 @@ export default {
         appBar
     },
 
+    // mounted() {
+    //     axios.get('/api/v1/settings').then((result) => {
+    //         if(result.status == 200){
+    //             this.setting = result.data
+    //         }
+    //     }).catch((err) => {
+            
+    //     });
+    // },
+
     
     data(){
         return {
-            active:1
+            active:1,
+            setting:[]
         }
     },
     methods:{

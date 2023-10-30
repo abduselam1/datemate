@@ -70,6 +70,10 @@ class AuthenticationController extends Controller
 
         Auth::login($user);
 
+        $user->setting()->create([
+            'notification_paused' => false,
+        ]);
+
         SessionService::createSession($request);
 
         return response(new ProfileResource($user),201);

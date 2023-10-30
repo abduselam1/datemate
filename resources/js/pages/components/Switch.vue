@@ -32,8 +32,14 @@
 </template>
 
 <script>
+import ModalVue from './Modal.vue';
 export default {
+    emits: ['update:modelValue'],
     props:{
+        modelValue: {
+            type:Boolean,
+            default:false
+        },
         label:{
             type: String,
             default:''
@@ -44,7 +50,7 @@ export default {
         }
     },
     created(){
-        this.inputValue = this.value
+        this.inputValue = this.modelValue
     },
     data() {
         return {
@@ -54,7 +60,7 @@ export default {
     methods:{
         updateChange(){
             console.log(this.label);
-            this.$emit('update:'+this.label,!this.inputValue)
+            this.$emit('update:modelValue',!this.inputValue)
         }
     }
     // watch: {

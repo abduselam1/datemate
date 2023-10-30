@@ -1,17 +1,18 @@
 <?php
 
-use App\Http\Controllers\Api\LanguageController;
-use App\Http\Controllers\Api\PictureController;
+use App\Http\Controllers\Api;
+// use App\Http\Controllers\Api\PictureController;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Events\NewMessageHasRecievedEvent;
-use App\Http\Controllers\Api\Auth\AuthenticationController;
-use App\Http\Controllers\Api\CountryController;
-use App\Http\Controllers\Api\UserController;
-use App\Http\Controllers\Api\MessageController;
-use App\Http\Controllers\Api\OnboardController;
+// use App\Http\Controllers\Api\Auth\AuthenticationController;
+// use App\Http\Controllers\Api\CountryController;
+// use App\Http\Controllers\Api\UserController;
+// use App\Http\Controllers\Api\MessageController;
+// use App\Http\Controllers\Api\OnboardController;
+// use App\Http\Controllers\Api\SettingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,44 +29,47 @@ Route::group(['prefix' => 'v1'],function(){
 
     Route::group(['middleware'=>'auth'],function (){
     
-        Route::get('onboard',[OnboardController::class,'create']);
+        Route::get('onboard',[Api\OnboardController::class,'create']);
     
-        Route::post('onboard',[OnboardController::class,'store']);
+        Route::post('onboard',[Api\OnboardController::class,'store']);
     
-        Route::get('logout',[AuthenticationController::class,'logout']);
+        Route::get('logout',[Api\Auth\AuthenticationController::class,'logout']);
     
-        Route::get('user',[UserController::class,'user']);
+        Route::get('user',[Api\UserController::class,'user']);
     
-        Route::get('messages-count',[MessageController::class,'countMessages']);
+        Route::get('messages-count',[Api\MessageController::class,'countMessages']);
     
-        Route::get('get-profile',[UserController::class,'getProfile']);
+        Route::get('get-profile',[Api\UserController::class,'getProfile']);
     
     
-        Route::post('picture',[PictureController::class,'store'])->name('picture.store');
+        Route::post('picture',[Api\PictureController::class,'store'])->name('picture.store');
     
-        Route::delete('picture/{picture}',[PictureController::class,'destroy'])->name('picture.delete');
+        Route::delete('picture/{picture}',[Api\PictureController::class,'destroy'])->name('picture.delete');
     
-        Route::put('picture/{picture}',[PictureController::class,'edit'])->name('picture.edit');
+        Route::put('picture/{picture}',[Api\PictureController::class,'edit'])->name('picture.edit');
     
-        Route::put('user/language', [UserController::class, 'editLanguage']);
+        Route::put('user/language', [Api\UserController::class, 'editLanguage']);
     
-        Route::put('user/purpose', [UserController::class, 'editPurpose']);
+        Route::put('user/purpose', [Api\UserController::class, 'editPurpose']);
     
-        Route::put('user/interest',[UserController::class,'editInterest']);
+        Route::put('user/interest',[Api\UserController::class,'editInterest']);
     
-        Route::put('user/education-and-work',[UserController::class,'editEducationAndWork']);
+        Route::put('user/education-and-work',[Api\UserController::class,'editEducationAndWork']);
 
-        Route::put('edit-profile',[UserController::class,'editProfile']);
+        Route::put('edit-profile',[Api\UserController::class,'editProfile']);
 
-        Route::put('password',[UserController::class, 'passwordChange']);
+        Route::put('password',[Api\UserController::class, 'passwordChange']);
     
-        Route::put('user/info',[UserController::class,'editUser']);
+        Route::put('user/info',[Api\UserController::class,'editUser']);
     
-        Route::get('interests',[UserController::class,'interestIndex']);
+        Route::get('interests',[Api\UserController::class,'interestIndex']);
 
-        Route::get('sessions',[AuthenticationController::class,'sessions']);
+        Route::get('sessions',[Api\AuthenticationController::class,'sessions']);
 
-        Route::post('sessions',[AuthenticationController::class,'sessionDestroy'])->middleware('auth.session');
+        Route::post('sessions',[Api\AuthenticationController::class,'sessionDestroy'])->middleware('auth.session');
+
+        Route::get('settings', [Api\SettingController::class, 'index']);
+
         
     
     
@@ -78,9 +82,9 @@ Route::group(['prefix' => 'v1'],function(){
     });
     
     
-    Route::post('login',[AuthenticationController::class,'login']);
+    Route::post('login',[Api\Auth\AuthenticationController::class,'login']);
     
-    Route::post('register',[AuthenticationController::class,'register']);
+    Route::post('register',[Api\Auth\AuthenticationController::class,'register']);
     
     Route::get('new-message',function (){
         $user = User::first();
@@ -88,7 +92,7 @@ Route::group(['prefix' => 'v1'],function(){
         return [true];
     });
 
-    Route::get('countries/{country}',[CountryController::class,'show']);
+    Route::get('countries/{country}',[Api\CountryController::class,'show']);
 
-    Route::get('init',[UserController::class,'init']);
+    Route::get('init',[Api\UserController::class,'init']);
 });
