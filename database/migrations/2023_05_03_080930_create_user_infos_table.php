@@ -30,6 +30,8 @@ return new class extends Migration
             $table->string('bio');
             $table->json('other')->default("{}");
             $table->double('height')->nullable();
+            $table->string('country')->nullable();
+            $table->string('city')->nullable();
             $table->string('star')->nullable();
             $table->string('smoking')->nullable();
             $table->string('drinking')->nullable();

@@ -32,6 +32,8 @@ class UserInfo extends Model
         'bio',
         'other',
         'height',
+        'country',
+        'city',
         'relationship',
         'star',
         'smoking',

@@ -172,6 +172,12 @@
 
             </div>
         </div>
+        <!-- <div class="col-span-4 h-full flex flex-col justify-center" v-show="loadingStore.isLoading">
+            <div class="flex justify-center">
+                <loading-spin />
+            </div>
+        </div> -->
+        
         <router-view />
         <!-- <div class=" lg:col-span-1 hidden lg:block"></div> -->
     </div>
@@ -257,17 +263,19 @@ import { warn } from 'vue';
 
 import Alert from "@/Components/alerts/Alert.vue";
 import PopupPage from "@/pages/components/PopupPage.vue";
+import LoadingSpin from "@/Components/LoadingSpin.vue";
+// import loadingStore from '@/loadingStore';
 // import iconLink from '@/pages/components/IconLink.vue'
 export default {
     name:"AuthenticatedLayout",
-    components: { PopupPage, Alert   },
+    components: { PopupPage, Alert, LoadingSpin   },
     data() {
         return {
             users: null,
             showMore: false,
             reportOPen: false,
             showAlert: false,
-            alertType: null
+            // loadingStore
         }
     },
     mounted() {

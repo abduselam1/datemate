@@ -16,13 +16,25 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 
 import { faUserSecret } from '@fortawesome/free-solid-svg-icons'
 import LoadingSpin from "@/Components/LoadingSpin.vue";
+// import loadingStore from './loadingStore';
 
 /* add icons to the library */
 library.add(faUserSecret)
 
 // const files = require.context('./', true, /\.vue$/i)
 
+// router.beforeEach((to, from, next) => {
+//   // Set the loading state to true
+//   loadingStore.isLoading = true;
 
+//   // Proceed with the navigation
+//   next();
+// });
+
+// router.afterEach(() => {
+//   // Set the loading state to false after the navigation is complete
+//   loadingStore.isLoading = false;
+// });
 
 var app = createApp(AppLayout).use(router)
 app.config.globalProperties.consts = {

@@ -55,6 +55,8 @@ class OnboardController extends Controller
             'job_title_id' => $request->job_title,
             'phone_number' => $request->phone_number,
             'education_level' => $request->education,
+            'country' => $request->country,
+            'city' => $request->city,
             'purpose' => $request->purpose,
         ]);
 

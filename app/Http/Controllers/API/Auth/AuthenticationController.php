@@ -99,7 +99,7 @@ class AuthenticationController extends Controller
         
         $sessions = Session::where('user_id',auth()->id())->orderBy('id','desc')->get();
         $id = session()->getId();
-
+        // sleep(5000);
         return response([
             'sessions' => $sessions,
             'id' => $session->getId()

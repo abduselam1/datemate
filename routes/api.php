@@ -64,9 +64,9 @@ Route::group(['prefix' => 'v1'],function(){
     
         Route::get('interests',[Api\UserController::class,'interestIndex']);
 
-        Route::get('sessions',[Api\AuthenticationController::class,'sessions']);
+        Route::get('sessions',[Api\Auth\AuthenticationController::class,'sessions']);
 
-        Route::post('sessions',[Api\AuthenticationController::class,'sessionDestroy'])->middleware('auth.session');
+        Route::post('sessions',[Api\Auth\AuthenticationController::class,'sessionDestroy'])->middleware('auth.session');
 
         Route::get('settings', [Api\SettingController::class, 'index']);
 

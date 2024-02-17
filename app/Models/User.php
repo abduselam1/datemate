@@ -120,7 +120,7 @@ class User extends Authenticatable implements FilamentUser, CanResetPassword
     }
 
     
-    public function interaction(): HasMany
+    public function interactions(): HasMany
     {
         return $this->hasMany(Interaction::class);
     }
